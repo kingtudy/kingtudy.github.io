@@ -8,8 +8,11 @@ const sceneManipulator = new OrbitControls(camera, renderer.domElement);
 
 sceneManipulator.enableDamping = true;
 sceneManipulator.dampingFactor = 0.25;
+sceneManipulator.maxPolarAngle = Math.PI * 0.495;
 
-sceneManipulator.target.set(0, 5, 0);
+sceneManipulator.target.set(0, 10, 0);
+sceneManipulator.minDistance = 40.0;
+sceneManipulator.maxDistance = 200.0;
 sceneManipulator.update();
 
 // Disable OrbitControls while using TransformControls

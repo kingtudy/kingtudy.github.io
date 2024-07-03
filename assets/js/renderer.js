@@ -9,6 +9,8 @@ $("#Container").append(renderer.domElement);
 renderer.setClearColor( 0xffffff, 0);
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 0.5;
 // renderer.shadowMap.type = THREE.BasicShadowMap;
 
 export { renderer }

@@ -10,6 +10,10 @@ import { renderer } from './renderer.js';
 import { sceneManipulator } from './orbit_controls.js';
 import { objectManipulation } from './transform_controls.js';
 
+//The Creation
+import { sky, sun } from './sky.js';
+import { water } from './ocean.js';
+
 const pointer = new THREE.Vector2();
 function onWindowResize() {
     //Set aspect ratio
@@ -36,6 +40,41 @@ scene.add(ambientLight);
 scene.add( objectManipulation );
 objectManipulation.addEventListener( 'change', animate );
 
+scene.add( water );
+scene.add( sky );
+
+const pmremGenerator = new THREE.PMREMGenerator( renderer );
+const sceneEnv = new THREE.Scene();
+
+let renderTarget;
+
+const parameters = {
+    elevation: 2,
+    azimuth: 180
+};
+
+function updateSun() {
+
+    const phi = THREE.MathUtils.degToRad( 90 - parameters.elevation );
+    const theta = THREE.MathUtils.degToRad( parameters.azimuth );
+
+    sun.setFromSphericalCoords( 1, phi, theta );
+
+    sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
+    water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
+
+    if ( renderTarget !== undefined ) renderTarget.dispose();
+
+    sceneEnv.add( sky );
+    renderTarget = pmremGenerator.fromScene( sceneEnv );
+    scene.add( sky );
+
+    scene.environment = renderTarget.texture;
+
+}
+
+updateSun();
+
 function animate() {
 
     //FPS stabilizer - 60
@@ -48,8 +87,11 @@ function animate() {
     }
 
     requestAnimationFrame(animate);
-    sceneManipulator.update();
 
+    water.material.uniforms['time'].value += 1.0 / 60.0;
+
+    renderer.render(scene, camera);
+    sceneManipulator.update();
 }
 
 //Goto the place where everything happens
