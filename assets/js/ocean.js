@@ -15,7 +15,7 @@ let water = new Water(
         sunDirection: new THREE.Vector3(),
         sunColor: 0xffffff,
         waterColor: 0x121A4A,
-    flowDirection: new THREE.Vector2( 1, 1 ),
+        flowDirection: new THREE.Vector2( 1, 1 ),
         // waterColor: 0x001e0f,
         distortionScale: 8,
         fog: scene.fog !== undefined

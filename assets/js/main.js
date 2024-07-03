@@ -75,6 +75,8 @@ function updateSun() {
 
 updateSun();
 
+sceneManipulator.enabled = false;
+
 function animate() {
 
     //FPS stabilizer - 60
@@ -91,7 +93,7 @@ function animate() {
     water.material.uniforms['time'].value += 1.0 / 60.0;
 
     renderer.render(scene, camera);
-    sceneManipulator.update();
+    // sceneManipulator.update();
 }
 
 //Goto the place where everything happens

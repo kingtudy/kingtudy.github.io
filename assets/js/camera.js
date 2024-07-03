@@ -10,7 +10,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 
 // Position and orient the camera
-camera.position.set(0, 15, 10);
+camera.position.set(0, 15, 50);
 camera.rotation.y = 145 * (Math.PI / 180);
 camera.layers.enableAll();
 
