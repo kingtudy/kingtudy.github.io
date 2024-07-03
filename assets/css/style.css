@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    overflow: hidden;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.canvas-container {
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    container: relative;
+    cursor: initial;
+    background-color: black;
+}
+
+.fire-effect {
+    width: 5px;
+    height: 5px;
+    background-color: yellow;
+    position: absolute;
+}
