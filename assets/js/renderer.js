@@ -1,6 +1,9 @@
 import * as THREE from "three";
+import $ from "jquery";
 
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({
+    antialias: true
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 $("#Container").append(renderer.domElement);

@@ -1,4 +1,7 @@
 import { Sky } from 'three/addons/objects/Sky.js';
+import { ImprovedNoise } from 'three/addons/math/ImprovedNoise.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
 import * as THREE from 'three';
 let sun = new THREE.Vector3();
 
