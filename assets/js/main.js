@@ -16,11 +16,13 @@ import { objectLoader, objectInit } from './object_handler.js';
 //The Creation
 import { sky, sun } from './sky.js';
 import { water } from './ocean.js';
+import { smokeEngine } from './smoke.js';
 
 //Vars
 let aurora, particleScene;
 const pointer = new THREE.Vector2();
 const particleCount = 500;
+let clock = new THREE.Clock();
 
 
 function onWindowResize() {
@@ -154,6 +156,9 @@ function animate() {
     renderer.render(scene, camera);
     particleScene.render();
     // sceneManipulator.update();
+
+    var dt = clock.getDelta();
+    smokeEngine.update( dt * 0.5 );
 }
 
 //Goto the place where everything happens
