@@ -51,6 +51,7 @@ body {
     height: 4em;
     width: 100%;
     display: flex;
+    cursor: pointer;
 }
 
 .menu-option-circle-container {
@@ -71,24 +72,44 @@ body {
 }
 
 .menu-option-circle-inner {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 2px solid var(--subnautica-neon);
     border-radius: 100px;
     background: #00000000;
     width: 3.60em;
     height: 3.60em;
+    position: relative;
+}
+
+.menu-option-container:hover .menu-option-box {
+    left: 1em;
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .menu-option-circle-inner::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10000;
     display: block;
     background: yellow;
     border: 1px solid orange;
-    width: 96%;
-    height: 96%;
+    width: 0%;
+    height: 0%;
+    content: '';
+    border-radius: 100px;
+    filter: blur(3px);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.menu-option-container:hover .menu-option-circle-inner::after {
+    display: block;
+    background: yellow;
+    border: 1px solid orange;
+    width: 90%;
+    height: 90%;
+    content: '';
+    border-radius: 100px;
+    filter: blur(3px);
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .left-side-of-menu {
@@ -106,6 +127,7 @@ body {
 .menu-option-box {
     top: -3px;
     left: -10px;
+    transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .menu-option-separator {
