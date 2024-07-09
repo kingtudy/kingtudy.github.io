@@ -158,8 +158,10 @@ function animate() {
     // sceneManipulator.update();
 
     var dt = clock.getDelta();
-    smokeEngine.update( dt * 0.5 );
+    // smokeEngine.update( dt * 0.5 );
 }
 
 //Goto the place where everything happens
 animate();
+
+console.log(THREE.REVISION);

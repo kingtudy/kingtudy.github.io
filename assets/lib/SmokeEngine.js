@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { Type, Tween } from "./ParticleEngine.js";
 
 /**
  * @author Lee Stemkoski   http://www.adelphi.edu/~stemkoski/
@@ -63,7 +64,7 @@ import * as THREE from 'three';
 	emitterDeathAge    : 60
 */
 
-Examples = {
+let Examples = {
     smoke : {
         positionStyle    : Type.CUBE,
         positionBase     : new THREE.Vector3( 0, 0, 0 ),
@@ -74,7 +75,7 @@ Examples = {
         velocitySpread   : new THREE.Vector3( 80, 50, 80 ),
         accelerationBase : new THREE.Vector3( 0,-10,0 ),
 
-        particleTexture : THREE.ImageUtils.loadTexture( 'images/smokeparticle.png'),
+        particleTexture : null,
 
         angleBase               : 0,
         angleSpread             : 720,
@@ -90,3 +91,34 @@ Examples = {
         emitterDeathAge    : 60
     }
 }
+
+const textureLoader = new THREE.TextureLoader();
+
+function loadSmokeTexture() {
+    return new Promise((resolve, reject) => {
+        textureLoader.load(
+            'https://stemkoski.github.io/Three.js/images/smokeparticle.png',
+            function (texture) {
+                Examples.smoke.particleTexture = texture;
+                resolve();
+            },
+            undefined,
+            function (error) {
+                console.error('An error occurred while loading the texture:', error);
+                reject(error);
+            }
+        );
+    });
+}
+
+loadSmokeTexture().then(() => {
+    // Now you can use the Examples object safely
+    console.log('Texture loaded, Examples object is ready:', Examples);
+
+    // Proceed with your application logic here
+    // For example, creating your particle system, etc.
+}).catch(error => {
+    console.error('Failed to load the texture:', error);
+});
+
+export { Examples }
