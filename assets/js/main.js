@@ -14,7 +14,7 @@ import { objectManipulation } from './transform_controls.js';
 import { objectLoader, objectInit } from './object_handler.js';
 
 //The Creation
-import { sky, sun } from './sky.js';
+import { sky, sun, moon, updateMoonPosition } from './sky.js';
 import { water } from './ocean.js';
 import { smokeEngine } from './smoke.js';
 
@@ -100,7 +100,7 @@ function updateSun() {
 updateSunPosition(0);
 updateSun();
 
-// sceneManipulator.enabled = false;
+sceneManipulator.enabled = false;
 
 
 //Load Aurora
@@ -114,6 +114,8 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
         // objectManipulation.setMode('rotate');
         // objectManipulation.attach(aurora);
     });
+
+scene.add(moon);
 
 // let switcher = 1;
 
@@ -138,6 +140,13 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
 
 particleScene = new Scene(scene, camera, renderer);
 particleScene.build();
+
+
+const tiltAngle = Math.PI / 6; // Tilt by 30 degrees
+const rotationSpeed = 0.005; // Adjust the rotation speed as needed
+
+// Apply the tilt
+moon.rotation.z = tiltAngle;
 
 function animate() {
 
@@ -170,9 +179,12 @@ function animate() {
 
     var dt = clock.getDelta();
     // smokeEngine.update( dt * 0.5 );
-    t += 0.002;
+    t += 0.003;
     updateSunPosition(t);
     updateSun();
+    updateMoonPosition(t);
+
+    moon.rotation.y += rotationSpeed;
     // console.log(sunPos);
 }
 
