@@ -10,9 +10,17 @@ sky.scale.setScalar( 10000 );
 
 const skyUniforms = sky.material.uniforms;
 
-skyUniforms[ 'turbidity' ].value = 10;
-skyUniforms[ 'rayleigh' ].value = 2;
-skyUniforms[ 'mieCoefficient' ].value = 0.005;
-skyUniforms[ 'mieDirectionalG' ].value = 0.8;
+// skyUniforms[ 'turbidity' ].value = 10;
+// skyUniforms[ 'rayleigh' ].value = 2;
+// skyUniforms[ 'mieCoefficient' ].value = 0.005;
+// skyUniforms[ 'mieDirectionalG' ].value = 0.8;
 
-export { sky, sun }
+skyUniforms[ 'turbidity' ].value = 7.5;
+skyUniforms[ 'rayleigh' ].value = 4;
+skyUniforms[ 'mieCoefficient' ].value = 0.013;
+skyUniforms[ 'mieDirectionalG' ].value = 0.68;
+
+let moonGeometry = new THREE.SphereGeometry(1, 32, 32);
+const texture = new THREE.TextureLoader(textureLoader.load('path_to_your_texture.jpg'));
+
+export { sky, sun, moon }

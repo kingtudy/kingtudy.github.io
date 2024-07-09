@@ -63,19 +63,30 @@ const sceneEnv = new THREE.Scene();
 let renderTarget;
 
 const parameters = {
-    elevation: 15,
-    azimuth: 222
+    elevation: 46,
+    azimuth: 40,
+    elevationCenter: 0,    // y-coordinate of the center
+    azimuthCenter: 181  // x-coordinate of the center
 };
+
+let xVariator, yVariator, t=0;
+
+function updateSunPosition(t) {
+    xVariator = parameters.azimuth * Math.cos(t) + parameters.azimuthCenter;
+    yVariator = parameters.elevation * Math.sin(t) + parameters.elevationCenter;
+}
 
 function updateSun() {
 
-    const phi = THREE.MathUtils.degToRad( 90 - parameters.elevation );
-    const theta = THREE.MathUtils.degToRad( parameters.azimuth );
+    const phi = THREE.MathUtils.degToRad( 90 - yVariator );
+    const theta = THREE.MathUtils.degToRad( xVariator );
 
     sun.setFromSphericalCoords( 1, phi, theta );
 
     sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
     water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
+    // water.material.uniforms[ 'fireDirection' ].value.copy( particleScene ).normalize();
+
 
     if ( renderTarget !== undefined ) renderTarget.dispose();
 
@@ -86,7 +97,7 @@ function updateSun() {
     scene.environment = renderTarget.texture;
 
 }
-
+updateSunPosition(0);
 updateSun();
 
 // sceneManipulator.enabled = false;
@@ -155,10 +166,14 @@ function animate() {
     particleScene.update();
     renderer.render(scene, camera);
     particleScene.render();
-    // sceneManipulator.update();
+    sceneManipulator.update();
 
     var dt = clock.getDelta();
     // smokeEngine.update( dt * 0.5 );
+    t += 0.002;
+    updateSunPosition(t);
+    updateSun();
+    // console.log(sunPos);
 }
 
 //Goto the place where everything happens
