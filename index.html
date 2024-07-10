@@ -13,77 +13,85 @@
 
     <!--  Audio magic  -->
     <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
+
+    <!--  UI magic  -->
+    <script type="module" src="./assets/js/helper.js"></script>
+
+
+
+    <!--  To refactor later  -->
+<!--    <script src="./assets/core/jquery/jquery.min.js"></script>-->
+
 </head>
 <body>
 
 <div class="canvas-container">
     <div id="Container" class="canvas-container-inner"></div>
-        <div class="menu-container">
-            <div class="container h-100">
-                <div class="row h-100">
-                    <div class="left-side-of-menu col-md-3">
-                        <div class="menu-option-container">
-                            <div class="menu-option-circle-container col-md-4">
-                                <div class="menu-option-circle-outer">
-                                    <div class="menu-option-circle-inner"></div>
-                                </div>
-                            </div>
-                            <div class="menu-option-box-container position-relative col-md-8">
-                                <div class="menu-option-box position-absolute h-100 w-100">
-                                    <div class="menu-option-box-texture subnautica-font">See projects</div>
-                                </div>
+    <div class="menu-container">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="left-side-of-menu col-md-3">
+                    <div id="projectsBtn" class="menu-option-container">
+                        <div class="menu-option-circle-container col-md-4">
+                            <div class="menu-option-circle-outer">
+                                <div class="menu-option-circle-inner"></div>
                             </div>
                         </div>
-                        <div class="menu-option-separator"></div>
-                        <div class="menu-option-container">
-                            <div class="menu-option-circle-container col-md-4">
-                                <div class="menu-option-circle-outer">
-                                    <div class="menu-option-circle-inner"></div>
-                                </div>
-                            </div>
-                            <div class="menu-option-box-container position-relative col-md-8">
-                                <div class="menu-option-box position-absolute h-100 w-100">
-                                    <div class="menu-option-box-texture subnautica-font">About me</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-option-separator"></div>
-                        <div class="menu-option-container">
-                            <div class="menu-option-circle-container col-md-4">
-                                <div class="menu-option-circle-outer">
-                                    <div class="menu-option-circle-inner"></div>
-                                </div>
-                            </div>
-                            <div class="menu-option-box-container position-relative col-md-8">
-                                <div class="menu-option-box position-absolute h-100 w-100">
-                                    <div class="menu-option-box-texture subnautica-font">Work experience</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="menu-option-separator"></div>
-                        <div class="menu-option-container">
-                            <div class="menu-option-circle-container col-md-4">
-                                <div class="menu-option-circle-outer">
-                                    <div class="menu-option-circle-inner"></div>
-                                </div>
-                            </div>
-                            <div class="menu-option-box-container position-relative col-md-8">
-                                <div class="menu-option-box position-absolute h-100 w-100">
-                                    <div class="menu-option-box-texture subnautica-font">Contact me</div>
-                                </div>
+                        <div class="menu-option-box-container position-relative col-md-8">
+                            <div class="menu-option-box position-absolute h-100 w-100">
+                                <div class="menu-option-box-texture subnautica-font">See projects</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2"></div>
-                    <div class="right-side-of-menu col-md-7">
-                        <div class="menu-contact-container">
-                            <div class="menu-contact">
-                                <div class="subnautica-font contact-text">
-                                    Here's how you can contact me:
-                                    <div class="social-container">
-                                        <a target="_blank" class="social-item" href="https://www.linkedin.com/in/ghiorghiu-tudor/"><img src="./assets/img/social/linkedin.svg" alt="linkedin" /></a>
-                                        <a target="_blank" class="social-item" href="https://github.com/kingtudy"><img src="./assets/img/social/github.svg" alt="github" /></a>
-                                    </div>
+                    <div class="menu-option-separator"></div>
+                    <div id="aboutBtn" class="menu-option-container">
+                        <div class="menu-option-circle-container col-md-4">
+                            <div class="menu-option-circle-outer">
+                                <div class="menu-option-circle-inner"></div>
+                            </div>
+                        </div>
+                        <div class="menu-option-box-container position-relative col-md-8">
+                            <div class="menu-option-box position-absolute h-100 w-100">
+                                <div class="menu-option-box-texture subnautica-font">About me</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-option-separator"></div>
+                    <div id="workBtn" class="menu-option-container">
+                        <div class="menu-option-circle-container col-md-4">
+                            <div class="menu-option-circle-outer">
+                                <div class="menu-option-circle-inner"></div>
+                            </div>
+                        </div>
+                        <div class="menu-option-box-container position-relative col-md-8">
+                            <div class="menu-option-box position-absolute h-100 w-100">
+                                <div class="menu-option-box-texture subnautica-font">Work experience</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-option-separator"></div>
+                    <div class="menu-option-container">
+                        <div class="menu-option-circle-container col-md-4">
+                            <div class="menu-option-circle-outer">
+                                <div class="menu-option-circle-inner"></div>
+                            </div>
+                        </div>
+                        <div class="menu-option-box-container position-relative col-md-8">
+                            <div class="menu-option-box position-absolute h-100 w-100">
+                                <div class="menu-option-box-texture subnautica-font">Contact me</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="right-side-of-menu col-md-7">
+                    <div class="menu-contact-container">
+                        <div class="menu-contact">
+                            <div class="subnautica-font contact-text">
+                                Here's how you can contact me:
+                                <div class="social-container">
+                                    <a target="_blank" class="social-item" href="https://www.linkedin.com/in/ghiorghiu-tudor/"><img src="./assets/img/social/linkedin.svg" alt="linkedin" /></a>
+                                    <a target="_blank" class="social-item" href="https://github.com/kingtudy"><img src="./assets/img/social/github.svg" alt="github" /></a>
                                 </div>
                             </div>
                         </div>
@@ -91,6 +99,27 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!--  Modal Cooking  -->
+    <div class="modal fade" id="displayModal" tabindex="-1" aria-labelledby="displayModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="displayModalLabel">My Projects</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Wabba Labba Dub Dub
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </body>
