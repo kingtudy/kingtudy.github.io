@@ -8,20 +8,27 @@ window.Modal = bootstrap.Modal;
 
 let myModal = bootstrap.Modal.getOrCreateInstance('#displayModal');
 let modalLabel = $('#displayModalLabel');
+let modalBody = $('#displayBody');
 
-// Trigger area - trigger warning
+$(document).ready(function() {
 
-projectBtn.on('click', function() {
-    myModal.show();
-    modalLabel.text('MY PROJECTS');
-});
+    // Trigger area - trigger warning
 
-aboutBtn.on('click', function() {
-    myModal.show();
-    modalLabel.text('ABOUT ME');
-});
+    projectBtn.on('click', function() {
+        myModal.show();
+        modalLabel.text('My projects');
+        modalBody.html(projectsContent);
+    });
 
-workBtn.on('click', function() {
-    myModal.show();
-    modalLabel.text('WORK EXPERIENCE');
+    aboutBtn.on('click', function() {
+        myModal.show();
+        modalLabel.text('ABOUT ME');
+        modalBody.html(aboutContent);
+    });
+
+    workBtn.on('click', function() {
+        myModal.show();
+        modalLabel.text('WORK EXPERIENCE');
+        modalBody.html(workContent);
+    });
 });
