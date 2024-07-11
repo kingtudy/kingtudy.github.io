@@ -4,6 +4,7 @@
     --subnautica-blue-neon : #8DE3FF;
     --subnautica-blue : #38A9FF;
     --subnautica-blue-deep : #0481e1;
+    --subnautica-blue-deeper : #166AAB;
 
     --subnautica-yellow-neon: #FFC029;
     --subnautica-yellow: #FFC029;
@@ -23,6 +24,11 @@ body {
 @font-face {
     font-family: subnautica-font;
     src: url("../fonts/DaysOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: subnautica-content-font;
+    src: url("../fonts/Aller_Std_Rg.ttf");
 }
 
 .canvas-container {
@@ -50,7 +56,7 @@ body {
     z-index: 100;
     top: 0;
     left: 0;
-    pointer-events: none;
+    /*pointer-events: none;*/
 }
 
 .menu-option-container {
@@ -188,6 +194,10 @@ body {
     font-family: subnautica-font;
 }
 
+.subnautica-content-font {
+    font-family: subnautica-content-font;
+}
+
 .menu-contact {
     display: flex;
     width: 100%;
@@ -196,9 +206,9 @@ body {
 }
 
 .contact-text {
-    font-size: 15px;
+    font-size: 18px;
     color: #fff;
-    font-weight: 200;
+    /*font-weight: 200;*/
     text-shadow: 2px 1px 3px black;
 }
 
@@ -298,11 +308,24 @@ body {
     color: #fff;
     font-size: 22px;
     font-weight: 500;
+    font-family: subnautica-font;
 }
 
 .subnautica-btn:hover {
     background: var(--subnautica-yellow);
     color: black;
+    border-color: var(--subnautica-yellow-neon);
+}
+
+.subnautica-btn:active {
+    background: var(--subnautica-yellow-deep);
+    color: white;
+    border-color: var(--subnautica-yellow-neon);
+}
+
+.display-tab.active {
+    background: var(--subnautica-yellow);
+    color: white;
     border-color: var(--subnautica-yellow-neon);
 }
 
@@ -317,6 +340,38 @@ body {
     opacity: 1 !important; /* Final opacity state for the entrance */
 }
 
-.modal-option {
-    font-size: 18px;
+.display-tab {
+    font-size: 15px;
+}
+
+.display-content-container {
+    position: relative;
+    display: flex;
+    background: var(--subnautica-blue-deeper);
+    border-radius: 5px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.display-content-container:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border: 7px solid rgba(0, 0, 0, 0.20);
+    filter: blur(10px);
+    padding: 5px;
+    position: absolute;
+    border-radius: 7px;
+    pointer-events: none;
+}
+
+.display-content {
+    font-size: 22px;
+    font-weight: 300;
+    color: #fff;
+    text-shadow: 2px 1px 3px black;
+    margin: 15px;
+    width: 100%;
+    height: 100%;
 }

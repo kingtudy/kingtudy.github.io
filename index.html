@@ -12,15 +12,17 @@
     <script type="module" src="./assets/js/main.js"></script>
 
     <!--  Audio magic  -->
-    <script src="https://code.createjs.com/1.0.0/easeljs.min.js"></script>
+<!--    <script tyle="module" src="./assets/core/easeljs/easeljs.min.js"></script>-->
 
     <!--  UI magic  -->
     <script type="module" src="./assets/js/helper.js"></script>
 
-
-
     <!--  To refactor later  -->
-<!--    <script src="./assets/core/jquery/jquery.min.js"></script>-->
+    <script src="./assets/core/jquery/jquery.min.js"></script>
+
+    <!--  Slick stuff  -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
 </head>
 <body>
@@ -74,7 +76,7 @@
                 <div class="right-side-of-menu col-md-7">
                     <div class="menu-contact-container">
                         <div class="menu-contact">
-                            <div class="subnautica-font contact-text">
+                            <div class="subnautica-content-font contact-text">
                                 Here's how you can contact me:
                                 <div class="social-container">
                                     <a target="_blank" class="social-item" href="https://www.linkedin.com/in/ghiorghiu-tudor/"><img src="./assets/img/social/linkedin.svg" alt="linkedin" /></a>
@@ -98,12 +100,11 @@
                 <div id="displayBody" class="modal-body">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="subnautica-btn" data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="subnautica-btn back-btn" data-bs-dismiss="modal">Back</button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 </body>

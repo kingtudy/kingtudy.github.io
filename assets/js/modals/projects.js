@@ -2,18 +2,31 @@ import $ from "jquery";
 
 const projectsContent = [
     '<div class="row h-100">' +
-    '<div style="background-color: #00000000;" class="p-0 col-md-3 modal-left-side">' +
-    '<button type="button" class="subnautica-btn modal-option active" data-bs-dismiss="modal">LTT Desk Configurator</button>' +
+
+    '<div class="p-0 col-md-3 display-tabs-container">' +
+    '<button class="subnautica-btn display-tab active">LTT Desk Configurator</button>' +
     '<div class="menu-option-separator"></div>' +
-    '<button type="button" class="subnautica-btn modal-option" data-bs-dismiss="modal">MSV.global</button>' +
+    '<button class="subnautica-btn display-tab">MSV.global</button>' +
     '<div class="menu-option-separator"></div>' +
-    '<button type="button" class="subnautica-btn modal-option" data-bs-dismiss="modal">ASGRA</button>' +
+    '<button class="subnautica-btn display-tab">ASGRA</button>' +
     '<div class="menu-option-separator"></div>' +
-    '<button type="button" class="subnautica-btn modal-option" data-bs-dismiss="modal">Cafeteria</button>' +
+    '<button class="subnautica-btn display-tab">Cafeteria</button>' +
     '<div class="menu-option-separator"></div>' +
-    '<button type="button" class="subnautica-btn modal-option" data-bs-dismiss="modal">Subnautica Interface</button>' +
+    '<button class="subnautica-btn display-tab">Subnautica Interface</button>' +
     '</div>' +
-    '<div style="background-color: #00000000;" class="col-md-9"></div>' +
+
+
+    '<div class="p-0 col-md-9 display-content-container">' +
+    '<div class="display-content">' +
+    '<h3 class="subnautica-font">LTT Desk Configurator</h3>' +
+    '<p class="subnautica-content-font">My Projects</p>' +
+    '</div>' +
+
+    '<div class="display-content">' +
+    'Fuck you' +
+    '</div>' +
+
+    '</div>' +
     '</div>'
 ];
 

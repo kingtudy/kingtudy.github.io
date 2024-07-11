@@ -18,6 +18,8 @@ import { sky, sun, moon, updateMoonPosition } from './sky.js';
 import { water } from './ocean.js';
 import { smokeEngine } from './smoke.js';
 import { meLoader } from './me.js';
+import { pdaLoader } from './pda.js';
+import './audio_handler.js';
 
 //Vars
 let aurora, particleScene;
@@ -101,7 +103,7 @@ function updateSun() {
 updateSunPosition(0);
 updateSun();
 
-sceneManipulator.enabled = true;
+sceneManipulator.enabled = false;
 
 
 //Load Aurora
@@ -122,6 +124,10 @@ scene.add(moon);
 meLoader().then((me) => {
     scene.add(me);
 });
+
+// pdaLoader().then((pda) => {
+//     scene.add(pda);
+// });
 
 // let switcher = 1;
 
