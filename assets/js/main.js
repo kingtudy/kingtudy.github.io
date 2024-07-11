@@ -17,6 +17,7 @@ import { objectLoader, objectInit } from './object_handler.js';
 import { sky, sun, moon, updateMoonPosition } from './sky.js';
 import { water } from './ocean.js';
 import { smokeEngine } from './smoke.js';
+import { meLoader } from './me.js';
 
 //Vars
 let aurora, particleScene;
@@ -100,7 +101,7 @@ function updateSun() {
 updateSunPosition(0);
 updateSun();
 
-sceneManipulator.enabled = false;
+sceneManipulator.enabled = true;
 
 
 //Load Aurora
@@ -116,6 +117,11 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
     });
 
 scene.add(moon);
+
+
+meLoader().then((me) => {
+    scene.add(me);
+});
 
 // let switcher = 1;
 
