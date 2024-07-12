@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 
-import { FBXLoader } from 'three/addons/loaders/fbxLoader.js';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
 
-function objectLoader(objPath, objTexture, textureType) {
+function objectLoader(objPath, objTexture) {
     return new Promise((resolve, reject) => {
         const fbxLoader = new FBXLoader();
         const mtlLoader = new MTLLoader();

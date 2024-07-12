@@ -1,4 +1,4 @@
-import $ from "jquery";
+
 
 const workContent = [
     '<div class="row h-100">' +

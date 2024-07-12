@@ -1,4 +1,4 @@
-import $ from "jquery";
+
 
 const aboutContent = [
     '<h6>WELCOME! What do you need to know?</h6>' +

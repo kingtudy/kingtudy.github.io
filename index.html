@@ -6,24 +6,28 @@
 
     <title>My Portfolio</title>
 
-    <link href="./assets/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    <!--  Core shit  -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="text/javascript" src="./assets/core/jquery/jquery.min.js"></script>
+
+    <!--  Slick stuff  -->
+    <link type="text/css" rel="stylesheet" href="./assets/core/slick-carousel/slick/slick.css" />
+    <link type="text/css" rel="stylesheet" href="./assets/core/slick-carousel/slick/slick-theme.css" />
 
     <!--  All the magic here  -->
     <script type="module" src="./assets/js/main.js"></script>
 
-    <!--  Audio magic  -->
-<!--    <script tyle="module" src="./assets/core/easeljs/easeljs.min.js"></script>-->
-
     <!--  UI magic  -->
     <script type="module" src="./assets/js/helper.js"></script>
-
-    <!--  To refactor later  -->
-    <script src="./assets/core/jquery/jquery.min.js"></script>
-
-    <!--  Slick stuff  -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
 </head>
 <body>
 
@@ -79,8 +83,11 @@
                             <div class="subnautica-content-font contact-text">
                                 Here's how you can contact me:
                                 <div class="social-container">
-                                    <a target="_blank" class="social-item" href="https://www.linkedin.com/in/ghiorghiu-tudor/"><img src="./assets/img/social/linkedin.svg" alt="linkedin" /></a>
-                                    <a target="_blank" class="social-item" href="https://github.com/kingtudy"><img src="./assets/img/social/github.svg" alt="github" /></a>
+                                    <a target="_blank" class="social-item"
+                                       href="https://www.linkedin.com/in/ghiorghiu-tudor/"><img
+                                            src="./assets/img/social/linkedin.svg" alt="linkedin"/></a>
+                                    <a target="_blank" class="social-item" href="https://github.com/kingtudy"><img
+                                            src="./assets/img/social/github.svg" alt="github"/></a>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +98,8 @@
     </div>
 
     <!--  Modal Cooking  -->
-    <div class="modal custom-fade fade" id="displayModal" tabindex="-1" aria-labelledby="displayModalLabel" aria-hidden="true">
+    <div class="modal custom-fade fade" id="displayModal" tabindex="-1" aria-labelledby="displayModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import $ from "jquery";
+
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true

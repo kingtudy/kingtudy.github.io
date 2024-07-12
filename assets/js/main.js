@@ -1,6 +1,5 @@
 //Core
 import * as THREE from 'three';
-import $ from "jquery";
 // import './mouse_magic.js';
 
 //Project

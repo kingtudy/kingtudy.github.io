@@ -1,7 +1,7 @@
-import $ from "jquery";
-
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
 const audioBuffers = {};
+let gainNode = audioContext.createGain();
 
 function loadSound(key, url) {
     return fetch(url)
@@ -15,7 +15,9 @@ function loadSound(key, url) {
 function playSound(key) {
     const soundSource = audioContext.createBufferSource();
     soundSource.buffer = audioBuffers[key];
-    soundSource.connect(audioContext.destination);
+    soundSource.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    gainNode.gain.value = 0.5; // Set volume (range is 0.0 to 1.0)
     soundSource.start(0);
 }
 

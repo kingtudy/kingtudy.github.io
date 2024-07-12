@@ -1,9 +1,15 @@
 import { projectsContent, projectBtn } from './modals/projects.js';
 import { aboutContent, aboutBtn } from './modals/about.js';
 import { workContent, workBtn } from './modals/work.js';
-import $ from "jquery";
+
 import '../core/bootstrap/js/bootstrap.min.js';
-import { playSound } from "./audio_handler";
+import { playSound } from "./audio_handler.js";
+
+// import '../core/slick-carousel/slick/slick.css';
+// import '../core/slick-carousel/slick/slick-theme.css';
+// import '../core/slick-carousel';
+
+// import 'slick-carousel';
 
 window.Modal = bootstrap.Modal;
 
@@ -36,6 +42,12 @@ $(document).ready(function() {
         });
 
         setClickListeners(tabs, contents);
+
+        $('#displaySliderContainer').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
     });
 
     aboutBtn.on('click', function() {
@@ -87,6 +99,7 @@ $(document).ready(function() {
     $('.back-btn').on('mouseenter', function () {
         playSound('menu-tick');
     });
+
     $('.back-btn').on('click', function () {
         playSound('menu-close');
     });
