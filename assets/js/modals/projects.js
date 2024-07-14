@@ -3,8 +3,8 @@
 let sliderData = '';
 for(let i=0; i < 11; i++) {
     sliderData +=
-        '<div class="showcase-img-container">' +
-        '<img src="./assets/projects_data/ltt/res' + i + '.gif" class="slider-img" alt="slider-img" />' +
+        '<div class="slider-img-container">' +
+        '<img src="./assets/projects_data/ltt/res' + i + '.gif" class="img-responsive" alt="slider-img" />' +
         '</div>';
 }
 
@@ -25,6 +25,7 @@ const projectsContent = [
 
 
     '<div class="p-0 col-md-9 display-content-container">' +
+
     '<div class="display-content">' +
     '<h3 class="subnautica-font mt-2 text-center">LTT Desk Configurator</h3>' +
     '<img src="./assets/img/cool_lines.svg" class="cool-separator" alt="separator-img" />' +
@@ -37,9 +38,9 @@ const projectsContent = [
     '<div id="displaySliderContainer" class="display-slider-container">' +
     sliderData +
     '</div>' +
-    '</div>' +
 
     '<p class="subnautica-content-font">My Projects</p>' +
+    '</div>' +
     '</div>' +
 
     '<div class="display-content">' +

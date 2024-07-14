@@ -272,9 +272,14 @@ export class Scene {
     }
 
     setupSceneComponents() {
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-        this.scene.add(directionalLight);
-        directionalLight.position.set(5, 5, 5);
+        // const directionalLight = new THREE.DirectionalLight(0xffffff, 10);
+        // this.scene.add(directionalLight);
+        // directionalLight.position.set(130, 780, -1382);
+        // directionalLight.target(new THREE.Vector3(130, 580, -1582));
+        //
+        //
+        // const helper = new THREE.DirectionalLightHelper( directionalLight, 5 );
+        // this.scene.add( helper );
 
         return Promise.all([])
             .then(([]) => {
@@ -296,7 +301,7 @@ export class Scene {
                 const lightParent = new THREE.Object3D();
                 this.scene.add(lightParent);
                 lightParent.position.set(0,0,0);
-                lightParent.position.add(new THREE.Vector3(0, 0.65, 0));
+                lightParent.position.add(new THREE.Vector3(130, 580, -1000));
 
                 const flickerLightShadows = {
                     'mapSize': 1024,
@@ -305,7 +310,7 @@ export class Scene {
                     'bias': .000009,
                     'edgeRadius': 3
                 };
-                this.manager.addComponent(new Photons.FlickerLight(lightParent, 10, 2, new THREE.Color().setRGB(1, .8, .4), 0, 1.0, flickerLightShadows));
+                this.manager.addComponent(new Photons.FlickerLight(lightParent, 100, 2, new THREE.Color().setRGB(1, .8, .4), 0, 1.0, flickerLightShadows));
             });
     }
 }

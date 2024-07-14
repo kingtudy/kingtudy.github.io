@@ -5,11 +5,7 @@ import { workContent, workBtn } from './modals/work.js';
 import '../core/bootstrap/js/bootstrap.min.js';
 import { playSound } from "./audio_handler.js";
 
-// import '../core/slick-carousel/slick/slick.css';
-// import '../core/slick-carousel/slick/slick-theme.css';
-// import '../core/slick-carousel';
-
-// import 'slick-carousel';
+import '../core/slick-carousel/slick/slick.js';
 
 window.Modal = bootstrap.Modal;
 
@@ -45,8 +41,8 @@ $(document).ready(function() {
 
         $('#displaySliderContainer').slick({
             infinite: true,
-            slidesToShow: 3,
-            slidesToScroll: 3
+            slidesToShow: 1,
+            slidesToScroll: 1
         });
     });
 

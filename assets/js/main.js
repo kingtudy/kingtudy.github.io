@@ -13,7 +13,7 @@ import { objectManipulation } from './transform_controls.js';
 import { objectLoader, objectInit } from './object_handler.js';
 
 //The Creation
-import { sky, sun, moon, updateMoonPosition } from './sky.js';
+import { sky, sun, moon, updateMoonPosition, stars, planet, updatePlanetPosition } from './sky.js';
 import { water } from './ocean.js';
 import { smokeEngine } from './smoke.js';
 import { meLoader } from './me.js';
@@ -71,7 +71,7 @@ const parameters = {
     azimuthCenter: 181  // x-coordinate of the center
 };
 
-let xVariator, yVariator, t=0;
+let xVariator, yVariator, t= 0, t2=0;
 
 function updateSunPosition(t) {
     xVariator = parameters.azimuth * Math.cos(t) + parameters.azimuthCenter;
@@ -89,6 +89,23 @@ function updateSun() {
     water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
     // water.material.uniforms[ 'fireDirection' ].value.copy( particleScene ).normalize();
 
+    if(sun.y < 0){
+        if(!scene.getObjectByName('stars'))
+            scene.add(stars);
+        renderer.toneMappingExposure = 0.3;
+        // sky.material.uniforms[ 'turbidity' ].value = 0;
+        // sky.material.uniforms[ 'rayleigh' ].value = 0.1;
+        // sky.material.uniforms[ 'mieCoefficient' ].value = 0;
+        // sky.material.uniforms[ 'mieDirectionalG' ].value = 0.99;
+    } else {
+        if(scene.getObjectByName('stars'))
+            scene.remove(stars);
+        renderer.toneMappingExposure = 0.5;
+        // sky.material.uniforms[ 'turbidity' ].value = 10;
+        // sky.material.uniforms[ 'rayleigh' ].value = 4;
+        // sky.material.uniforms[ 'mieCoefficient' ].value = 0.013;
+        // sky.material.uniforms[ 'mieDirectionalG' ].value = 0.68;
+    }
 
     if ( renderTarget !== undefined ) renderTarget.dispose();
 
@@ -102,7 +119,7 @@ function updateSun() {
 updateSunPosition(0);
 updateSun();
 
-sceneManipulator.enabled = false;
+sceneManipulator.enabled = true;
 
 
 //Load Aurora
@@ -117,7 +134,17 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
         // objectManipulation.attach(aurora);
     });
 
+
+const fireLight = new THREE.DirectionalLight(0xffffff, 10);
+scene.add(fireLight);
+fireLight.position.set(130, 780, -1382);
+fireLight.target(aurora);
+
+const helper = new THREE.DirectionalLightHelper( fireLight, 5 );
+scene.add( helper );
+
 scene.add(moon);
+scene.add(planet);
 
 
 meLoader().then((me) => {
@@ -155,9 +182,11 @@ particleScene.build();
 
 const tiltAngle = Math.PI / 6; // Tilt by 30 degrees
 const rotationSpeed = 0.005; // Adjust the rotation speed as needed
+const rotationSpeed2 = 0.002; // Adjust the rotation speed as needed
 
 // Apply the tilt
 moon.rotation.z = tiltAngle;
+planet.rotation.z = tiltAngle;
 
 function animate() {
 
@@ -191,11 +220,14 @@ function animate() {
     var dt = clock.getDelta();
     // smokeEngine.update( dt * 0.5 );
     t += 0.003;
+    t2 += 0.003;
     updateSunPosition(t);
     updateSun();
     updateMoonPosition(t);
+    updatePlanetPosition(t2);
 
     moon.rotation.y += rotationSpeed;
+    planet.rotation.y += rotationSpeed2;
     // console.log(sunPos);
 }
 
