@@ -60,7 +60,7 @@ sprite.colorSpace = THREE.SRGBColorSpace;
 
 for ( let i = 0; i < 10000; i ++ ) {
 
-    const x = 10000 * Math.random() - 5000;
+    const x = 12000 * Math.random() - 6000;
     const y = 10000 * Math.random() - 1000;
     const z = 1000 * Math.random() - 5000;
 

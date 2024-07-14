@@ -86,7 +86,7 @@ function updateSun() {
     sun.setFromSphericalCoords( 1, phi, theta );
 
     sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
-    water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
+    // water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
     // water.material.uniforms[ 'fireDirection' ].value.copy( particleScene ).normalize();
 
     if(sun.y < 0){
@@ -137,15 +137,6 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
         // objectManipulation.setMode('rotate');
         // objectManipulation.attach(aurora);
     });
-
-//Illuminating the fires
-const fireLight = new THREE.PointLight( 0xff0000, 300000, 3000 );
-scene.add(fireLight);
-fireLight.position.set(100, 580, -1382);
-
-const helper = new THREE.PointLightHelper( fireLight, 3000 );
-scene.add( helper );
-
 
 scene.add(moon);
 scene.add(planet);

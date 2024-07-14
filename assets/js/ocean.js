@@ -1,5 +1,6 @@
 import { scene } from './scene.js';
 import { Water } from 'three/addons/objects/Water.js';
+// import { Water2 } from 'three/addons/objects/Water2.js';
 import * as THREE from 'three';
 
 const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );

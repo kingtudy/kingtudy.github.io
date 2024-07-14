@@ -27,7 +27,7 @@ function objectLoader(objPath, objTexture) {
                                 child.material = new THREE.MeshStandardMaterial({
                                     map: textureArray[0],
                                     metalness: 1.0, // High metalness for reflective surfaces
-                                    roughness: 0.1  // Low roughness for sharp reflections
+                                    roughness: 1.0  // Low roughness for sharp reflections
                                 });
                             } else {
                                 child.material = new THREE.MeshStandardMaterial({

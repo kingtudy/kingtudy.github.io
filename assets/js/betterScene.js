@@ -297,11 +297,21 @@ export class Scene {
                 fogParent.position.y += 1.0;
                 // this.scene.add(fogParent);
 
-
+                //FIRE
                 const lightParent = new THREE.Object3D();
                 this.scene.add(lightParent);
                 lightParent.position.set(0,0,0);
-                lightParent.position.add(new THREE.Vector3(130, 580, -1000));
+                lightParent.position.add(new THREE.Vector3(130, 580, -1582));
+
+                const lightParent2 = new THREE.Object3D();
+                this.scene.add(lightParent2);
+                lightParent2.position.set(0,0,0);
+                lightParent2.position.add(new THREE.Vector3(-150, 50, -1800));
+
+                const lightParent3 = new THREE.Object3D();
+                this.scene.add(lightParent3);
+                lightParent3.position.set(0,0,0);
+                lightParent3.position.add(new THREE.Vector3(-460, 1100, -2975));
 
                 const flickerLightShadows = {
                     'mapSize': 1024,
@@ -310,7 +320,25 @@ export class Scene {
                     'bias': .000009,
                     'edgeRadius': 3
                 };
-                this.manager.addComponent(new Photons.FlickerLight(lightParent, 100, 2, new THREE.Color().setRGB(1, .8, .4), 0, 1.0, flickerLightShadows));
+
+                this.manager.addComponent(new Photons.FlickerLight(lightParent, 500, 3, new THREE.Color().setRGB(1, .8, .4), 0, 1.0, flickerLightShadows));
+                this.manager.addComponent(new Photons.FlickerLight(lightParent2, 100, 10, new THREE.Color().setRGB(1, .8, .4), 0, 1.0, flickerLightShadows));
+                this.manager.addComponent(new Photons.FlickerLight(lightParent3, 200, 5, new THREE.Color().setRGB(1, .8, .4), 0, 1.0, flickerLightShadows));
+
+                const lightParent4 = new THREE.Object3D();
+                this.scene.add(lightParent4);
+                lightParent4.position.set(0,0,0);
+                lightParent4.position.add(new THREE.Vector3(-300, 250, -1850));
+
+                const flickerLightShadows2 = {
+                    'mapSize': 1024,
+                    'cameraNear': 0.5,
+                    'cameraFar': 500,
+                    'bias': .000009,
+                    'edgeRadius': 10
+                };
+
+                this.manager.addComponent(new Photons.FlickerLight(lightParent4, 200, 5, new THREE.Color( 0x8DE3FF ), 0, 1.0, flickerLightShadows2));
             });
     }
 }
