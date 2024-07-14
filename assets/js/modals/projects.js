@@ -36,7 +36,7 @@ const projectsContent = [
                 '<img src="./assets/img/cool_lines.svg" class="cool-separator" alt="separator-img" />' +
 
                 '<div class="display-slider-container">' +
-                    '<div id="displaySliderContainer">' +
+                    '<div data-slick=\'{"slidesToShow": 1, "slidesToScroll": 1}\' id="displaySliderContainer">' +
                         sliderData +
                     '</div>' +
                 '</div>' +
