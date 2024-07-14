@@ -31,11 +31,12 @@ function objectLoader(objPath, objTexture) {
                                 });
                             } else {
                                 child.material = new THREE.MeshStandardMaterial({
-                                    map: textureArray[1],
-                                    emissive: 0xffffff,      // Emissive color (glowing color)
-                                    emissiveIntensity: 1     // Intensity of the emissive effect
+                                    map: textureArray[1]
                                 });
                             }
+
+                            child.castShadow = true;
+                            child.receiveShadow = true;
                             child.material.needsUpdate = true;
                         });
                     }

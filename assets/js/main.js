@@ -90,17 +90,21 @@ function updateSun() {
     // water.material.uniforms[ 'fireDirection' ].value.copy( particleScene ).normalize();
 
     if(sun.y < 0){
-        if(!scene.getObjectByName('stars'))
+        if(!scene.getObjectByName('stars')) {
             scene.add(stars);
-        renderer.toneMappingExposure = 0.3;
+        }
+        sun.intensity = 0;
+        // renderer.toneMappingExposure = 0.3;
         // sky.material.uniforms[ 'turbidity' ].value = 0;
         // sky.material.uniforms[ 'rayleigh' ].value = 0.1;
         // sky.material.uniforms[ 'mieCoefficient' ].value = 0;
         // sky.material.uniforms[ 'mieDirectionalG' ].value = 0.99;
     } else {
-        if(scene.getObjectByName('stars'))
+        if(scene.getObjectByName('stars')) {
             scene.remove(stars);
-        renderer.toneMappingExposure = 0.5;
+        }
+        sun.intensity = 1;
+        // renderer.toneMappingExposure = 1;
         // sky.material.uniforms[ 'turbidity' ].value = 10;
         // sky.material.uniforms[ 'rayleigh' ].value = 4;
         // sky.material.uniforms[ 'mieCoefficient' ].value = 0.013;
@@ -111,8 +115,8 @@ function updateSun() {
 
     sceneEnv.add( sky );
     renderTarget = pmremGenerator.fromScene( sceneEnv );
-    scene.add( sky );
-
+    if(sun.y > 0)
+        scene.add( sky );
     scene.environment = renderTarget.texture;
 
 }
@@ -125,7 +129,7 @@ sceneManipulator.enabled = true;
 //Load Aurora
 objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_0.jpeg', './assets/img/textures/Tex_RGB_1.jpeg'], 0)
     .then((object) => {
-        aurora = objectInit(object, "chair", 2, -1000, -54, -3622);
+        aurora = objectInit(object, "aurora", 2, -1000, -54, -3622);
         aurora.rotation.x = 2.96;
         aurora.rotation.y = -1.04;
         aurora.rotation.z = 2.81;
@@ -134,14 +138,14 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
         // objectManipulation.attach(aurora);
     });
 
-
-const fireLight = new THREE.DirectionalLight(0xffffff, 10);
+//Illuminating the fires
+const fireLight = new THREE.PointLight( 0xff0000, 300000, 3000 );
 scene.add(fireLight);
-fireLight.position.set(130, 780, -1382);
-fireLight.target(aurora);
+fireLight.position.set(100, 580, -1382);
 
-const helper = new THREE.DirectionalLightHelper( fireLight, 5 );
+const helper = new THREE.PointLightHelper( fireLight, 3000 );
 scene.add( helper );
+
 
 scene.add(moon);
 scene.add(planet);
