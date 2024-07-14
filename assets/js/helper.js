@@ -41,6 +41,8 @@ $(document).ready(function() {
 
         $('#displaySliderContainer').slick({
             infinite: true,
+            autoplay: true,
+            autoplaySpeed: 5000,
             slidesToShow: 1,
             slidesToScroll: 1
         });
