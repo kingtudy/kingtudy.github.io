@@ -123,7 +123,7 @@ function updateSun() {
 updateSunPosition(0);
 updateSun();
 
-sceneManipulator.enabled = true;
+sceneManipulator.enabled = false;
 
 
 //Load Aurora
