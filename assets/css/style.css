@@ -38,38 +38,25 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--subnautica-blue);
+    background: url("../img/scrollbar.png") no-repeat center, var(--subnautica-blue);
     border-radius: 5px;
     border: 1px solid var(--subnautica-blue-neon);
     cursor: grab;
 }
 
-/*::-webkit-scrollbar-thumb:before {*/
-/*    content: '';*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    border: 7px solid var(--subnautica-blue-neon);*/
-/*    display: flex;*/
-/*    border-radius: 20px;*/
-/*    filter: blur(10px);*/
-/*    padding: 5px;*/
-/*    position: absolute;*/
-/*}*/
-
-::-webkit-scrollbar-thumb:active {
+::-webkit-scrollbar-thumb:hover:active, ::-webkit-scrollbar-thumb:active {
     cursor: grabbing;
-    background: var(--subnautica-yellow) !important;
+    /*background: url("../img/scrollbar-active.png") no-repeat center, var(--subnautica-yellow-deep);*/
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--subnautica-blue);
+    background: url("../img/scrollbar-hover.png") no-repeat center, var(--subnautica-blue-deeper);
 }
 
-
-
-
-
+/*::-webkit-scrollbar-thumb:hover:active {*/
+/*    cursor: grabbing;*/
+/*}*/
 
 @font-face {
     font-family: subnautica-font;
@@ -442,7 +429,22 @@ body {
     object-fit: cover;
 }
 
+.showcase-img-container:hover:before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    top: 0;
+    left: 0;
+}
+
+.showcase-img-container:hover:before{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .showcase-img-container {
+    position: relative;
     width: auto;
     height: 20em;
     display: block;
