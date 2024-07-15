@@ -330,6 +330,11 @@ export class Scene {
                 lightParent4.position.set(0,0,0);
                 lightParent4.position.add(new THREE.Vector3(-300, 250, -1850));
 
+                const lightParent5 = new THREE.Object3D();
+                this.scene.add(lightParent5);
+                lightParent5.position.set(0,0,0);
+                lightParent5.position.add(new THREE.Vector3(-1380, 120, -2200));
+
                 const flickerLightShadows2 = {
                     'mapSize': 1024,
                     'cameraNear': 0.5,
@@ -338,7 +343,16 @@ export class Scene {
                     'edgeRadius': 10
                 };
 
+                const flickerLightShadows3 = {
+                    'mapSize': 1024,
+                    'cameraNear': 0.5,
+                    'cameraFar': 500,
+                    'bias': .000009,
+                    'edgeRadius': 3
+                };
+
                 this.manager.addComponent(new Photons.FlickerLight(lightParent4, 200, 5, new THREE.Color( 0x8DE3FF ), 0, 1.0, flickerLightShadows2));
+                this.manager.addComponent(new Photons.FlickerLight(lightParent5, 100, 1, new THREE.Color( 0x8DE3FF ), 0, 0.8, flickerLightShadows3));
             });
     }
 }

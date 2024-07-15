@@ -142,6 +142,16 @@ scene.add(moon);
 scene.add(planet);
 
 
+//Illuminating the fires
+// const boardLight = new THREE.PointLight( 0xff0000, 10, 100 );
+// scene.add(boardLight);
+// boardLight.position.set(-1080, 140, -2200);
+//
+// const helper = new THREE.PointLightHelper( boardLight, 100 );
+// scene.add( helper );
+
+
+
 meLoader().then((me) => {
     scene.add(me);
 });

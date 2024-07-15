@@ -84,14 +84,25 @@
                 <div class="right-side-of-menu col-md-7">
                     <div class="menu-contact-container">
                         <div class="menu-contact">
-                            <div class="subnautica-font contact-text">
-                                Here's how you can contact me:
-                                <div class="social-container">
-                                    <a target="_blank" class="social-item"
-                                       href="https://www.linkedin.com/in/ghiorghiu-tudor/"><img
-                                            src="./assets/img/social/linkedin.svg" alt="linkedin"/></a>
-                                    <a target="_blank" class="social-item" href="https://github.com/kingtudy"><img
-                                            src="./assets/img/social/github.svg" alt="github"/></a>
+                            <div class="menu-contact-inner">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 class="subnautica-font contact-text">Here's how you can contact me: </h4>
+                                        <div class="social-container">
+                                            <a target="_blank" class="social-item"
+                                               href="https://www.linkedin.com/in/ghiorghiu-tudor/"><img
+                                                    src="./assets/img/social/linkedin.svg" alt="linkedin"/></a>
+                                            <a target="_blank" class="social-item" href="https://github.com/kingtudy"><img
+                                                    src="./assets/img/social/github.svg" alt="github"/></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form class="form-container" action="">
+                                            <input id="mail" class="form-mail" name="mail" type="text" placeholder="Your email:" value="" />
+                                            <textarea id="message" class="form-message" placeholder="Your message:" name="message"></textarea>
+                                            <input class="subnautica-btn contact-btn" type="submit" value="Submit">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,8 +120,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title subnautica-font" id="displayModalLabel">My Projects</h5>
                 </div>
-                <div id="displayBody" class="modal-body">
-                </div>
+                <div id="displayBody" class="modal-body"></div>
                 <div class="modal-footer">
                     <button type="button" class="subnautica-btn back-btn" data-bs-dismiss="modal">Back</button>
                 </div>
