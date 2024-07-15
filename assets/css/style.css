@@ -429,6 +429,43 @@ body {
     object-fit: cover;
 }
 
+.show-size-image {
+    display: none;
+}
+
+.show-size-image:before {
+    content: '';
+    width: 100px;
+    height: 100px;
+    display: flex;
+    border: 7px solid var(--subnautica-blue-neon);
+    filter: blur(6px);
+    padding: 5px;
+    position: absolute;
+    border-radius: 25px;
+    pointer-events: none;
+}
+
+.show-size-image img {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--subnautica-blue-neon);
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.showcase-img-container:hover .show-size-image {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
 .showcase-img-container:hover:before{
     content: '';
     position: absolute;

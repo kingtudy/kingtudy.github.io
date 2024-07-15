@@ -37,6 +37,9 @@ const projectsContent = [
                 '<img src="./assets/img/cool_lines.svg" class="cool-separator" alt="separator-img" />' +
 
                 '<a href="./assets/projects_data/ltt/front.png" data-lightbox="mygallery" class="showcase-img-container">' +
+                    '<div class="show-size-image">' +
+                        '<img src="./assets/img/icons/resize.gif" alt="resize" />' +
+                    '</div>' +
                     '<img src="./assets/projects_data/ltt/front.png" class="img-responsive" alt="showcase-img" >' +
                 '</a>' +
 
