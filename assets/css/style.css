@@ -412,7 +412,7 @@ body {
     width: 100%;
     height: 100px;
     transform: rotate(42deg);
-    margin: -30px 0 0 0;
+    margin: -20px 0 0 0;
     pointer-events: none;
 }
 
@@ -430,21 +430,62 @@ body {
     border: 2px solid var(--subnautica-blue-neon);
     border-radius: 5px;
     overflow: hidden;
-    margin: 0 1em;
+    margin: 0 0 30px 0;
+}
+
+.display-slider-container:active {
+    cursor: grabbing;
 }
 
 .display-slider-container {
+    cursor: grab;
     display: block;
-    width: auto;
+    width: 100%;
     height: 20em;
-    border: 2px solid var(--subnautica-blue-neon);
-    border-radius: 5px;
+    /*border: 2px solid var(--subnautica-blue-neon);*/
+    /*border-radius: 5px;*/
     /*overflow: hidden;*/
-    margin: 0 1em;
+    /*margin: 0 1em;*/
 }
 
 #displaySliderContainer {
     display: block;
     width: 100%;
     height: 100%;
+}
+
+.subnautica-rounded-btn::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border: 7px solid var(--subnautica-blue-neon);
+    filter: blur(3px);
+    padding: 5px;
+    position: absolute;
+    border-radius: 100px;
+    pointer-events: none;
+}
+
+.subnautica-rounded-btn {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    border: 1px solid var(--subnautica-blue-neon);
+    background: var(--subnautica-blue-deep);
+    border-radius: 100px;
+    width: 3em;
+    height: 3em;
+    justify-content: center;
+    align-items: center;
+    transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.subnautica-rounded-btn:hover {
+    background: red;
+    transform: scale(1.15);
+}
+
+.inter-section-custom-margin {
+    margin: 30px 0 10px 0;
 }

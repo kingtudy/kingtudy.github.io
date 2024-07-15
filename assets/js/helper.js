@@ -6,6 +6,7 @@ import '../core/bootstrap/js/bootstrap.min.js';
 import { playSound } from "./audio_handler.js";
 
 import '../core/slick-carousel/slick/slick.js';
+// import '../core/lightbox/lightbox.min.js';
 
 window.Modal = bootstrap.Modal;
 
@@ -23,7 +24,7 @@ $(document).ready(function() {
         modalBody.html(projectsContent);
         // const nrChildren = $('#displayInsides').children('.subnautica-btn').length;
 
-        let tabs = $('.display-tabs-container').children('.display-tab');
+        let tabs = $('.display-tabs-container div').children('.display-tab');
         let contents = $('.display-content-container').children('.display-content');
 
         tabs.each(function(index) {
@@ -37,17 +38,20 @@ $(document).ready(function() {
             }
         });
 
-        setClickListeners(tabs, contents);
-
         $('#displaySliderContainer').slick({
             infinite: true,
-            autoplay: true,
+            autoplay: false,
             autoplaySpeed: 5000,
             slidesToShow: 1,
             slidesToScroll: 1,
             dots: true,
-            adaptiveHeight: true
+            adaptiveHeight: true,
+            centerMode: false
         });
+        $('#displaySliderContainer').slick('setPosition');
+        $('.display-slider-container').addClass('open');
+
+        setClickListeners(tabs, contents);
     });
 
     aboutBtn.on('click', function() {

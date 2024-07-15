@@ -1,6 +1,12 @@
-
-
 let sliderData = '';
+const link = 'https://sophirion.net/super_ultra_mega_secret_project/index.html';
+const description =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id rutrum enim. Mauris eu urna ut ex euismod posuere. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent vehicula eleifend nisi sed facilisis. Nullam laoreet urna vel turpis dictum, sagittis facilisis eros feugiat. Donec eget augue felis. Aliquam eget elementum nulla.' +
+    '<br><br>' +
+    'Nunc dignissim sodales ante, vitae vulputate elit semper sed. Morbi sed pulvinar lectus. Cras lectus mauris, porttitor non cursus ac, hendrerit at libero. Curabitur rutrum pharetra dignissim. Donec at pellentesque dolor. Suspendisse et lorem posuere, pulvinar urna nec, auctor diam. Nullam a congue nisl, in efficitur ipsum. Mauris maximus, nisl vel egestas porttitor, nunc leo commodo leo, sit amet euismod purus justo eu elit. Nam quis blandit lorem, sit amet pellentesque nisl. Donec ut elementum magna. Nulla tincidunt egestas lacus. Cras vitae odio sapien. Proin turpis nibh, sollicitudin nec ligula nec, luctus rutrum nibh.' +
+    '<br><br>' +
+    'Etiam arcu est, volutpat sit amet lorem vitae, viverra volutpat enim. Ut non dignissim erat. Vestibulum egestas mauris ultricies pellentesque ornare. Sed non nisi lacus. Nullam vehicula maximus ultricies. Pellentesque dignissim commodo quam, eu euismod nunc ornare vel. Praesent non sapien cursus, varius felis vitae, faucibus nibh. Duis elementum neque in rutrum eleifend.';
+
 for(let i=0; i < 11; i++) {
     sliderData +=
         '<div class="slider-img-container">' +
@@ -27,21 +33,30 @@ const projectsContent = [
 
         '<div class="p-0 col-md-9 display-content-container">' +
             '<div class="display-content">' +
-                '<h3 class="subnautica-font mt-2 text-center">LTT Desk Configurator</h3>' +
+                '<h3 class="subnautica-font mt-2 text-center m-0">LTT Desk Configurator</h3>' +
                 '<img src="./assets/img/cool_lines.svg" class="cool-separator" alt="separator-img" />' +
 
-                '<div class="showcase-img-container">' +
+                '<a href="./assets/projects_data/ltt/front.png" data-lightbox="mygallery" class="showcase-img-container">' +
                     '<img src="./assets/projects_data/ltt/front.png" class="img-responsive" alt="showcase-img" >' +
+                '</a>' +
+
+                '<div class="d-flex justify-content-start align-items-center inter-section-custom-margin">' +
+                    '<h3 style="margin: 0 1em 0 0;" class="subnautica-font d-inline">Access project:</h3>' +
+                    '<a target="_blank" class="subnautica-rounded-btn" href="'+ link +'" >' +
+                        '<img src="./assets/img/icons/eye.gif" alt="eye" class="img-responsive" />' +
+                    '</a>' +
                 '</div>' +
-                '<img src="./assets/img/cool_lines.svg" class="cool-separator" alt="separator-img" />' +
+
+                '<h3 class="subnautica-font inter-section-custom-margin">Description:</h3>' +
+                '<p class="subnautica-content-font">' + description + '</p>' +
 
                 '<div class="display-slider-container">' +
-                    '<div data-slick=\'{"slidesToShow": 1, "slidesToScroll": 1}\' id="displaySliderContainer">' +
+                    '<div class="row" id="displaySliderContainer">' +
                         sliderData +
                     '</div>' +
                 '</div>' +
 
-                '<p class="subnautica-content-font">My Projects</p>' +
+
             '</div>' +
 
             '<div class="display-content">' +
