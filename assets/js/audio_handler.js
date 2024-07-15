@@ -25,7 +25,8 @@ Promise.all([
     loadSound('menu-open', './assets/audio/nier_menu.ogg'),
     loadSound('menu-close', './assets/audio/nier_menu_close.ogg'),
     loadSound('menu-select', './assets/audio/nier_menu_select.ogg'),
-    loadSound('menu-tick', './assets/audio/nier_menu_tick.ogg')
+    loadSound('menu-tick', './assets/audio/nier_menu_tick.ogg'),
+    loadSound('menu-link', './assets/audio/nier_menu_link.ogg')
 ]).then(() => {
     console.log('All sounds loaded');
 }).catch(error => {

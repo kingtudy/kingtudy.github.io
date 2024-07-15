@@ -42,13 +42,13 @@ const projectsContent = [
 
                 '<div class="d-flex justify-content-start align-items-center inter-section-custom-margin">' +
                     '<h3 style="margin: 0 1em 0 0;" class="subnautica-font d-inline">Access project:</h3>' +
-                    '<a target="_blank" class="subnautica-rounded-btn" href="'+ link +'" >' +
+                    '<a id="outerLink" target="_blank" class="subnautica-rounded-btn" href="'+ link +'" >' +
                         '<img src="./assets/img/icons/eye.gif" alt="eye" class="img-responsive" />' +
                     '</a>' +
                 '</div>' +
 
                 '<h3 class="subnautica-font inter-section-custom-margin">Description:</h3>' +
-                '<p class="subnautica-content-font">' + description + '</p>' +
+                '<p class="subnautica-content-font description">' + description + '</p>' +
 
                 '<div class="display-slider-container">' +
                     '<div class="row" id="displaySliderContainer">' +

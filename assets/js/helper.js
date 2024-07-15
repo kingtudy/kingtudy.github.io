@@ -80,12 +80,28 @@ $(document).ready(function() {
             });
         });
 
+        $('.showcase-img-container').on('mouseenter', function () {
+            playSound('menu-tick');
+        });
+
+        $('.showcase-img-container').on('click', function () {
+            playSound('menu-select');
+        });
+
         $('.display-tab').on('mouseenter', function () {
             playSound('menu-tick');
         });
 
         $('.display-tab').on('click', function () {
             playSound('menu-select');
+        });
+
+        $('#outerLink').on('mouseenter', function () {
+            playSound('menu-tick');
+        });
+
+        $('#outerLink').on('click', function () {
+            playSound('menu-link');
         });
     }
 
