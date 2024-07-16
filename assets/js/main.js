@@ -15,7 +15,7 @@ import { objectLoader, objectInit } from './object_handler.js';
 //The Creation
 import { sky, sun, moon, updateMoonPosition, stars, planet, updatePlanetPosition } from './sky.js';
 import { water } from './ocean.js';
-import { smokeEngine } from './smoke.js';
+// import { smokeEngine } from './smoke.js';
 import { meLoader } from './me.js';
 import { pdaLoader } from './pda.js';
 import './audio_handler.js';

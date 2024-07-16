@@ -131,4 +131,39 @@ $(document).ready(function() {
     $('.back-btn').on('click', function () {
         playSound('menu-close');
     });
+
+    $('#contactBtn').on('mouseenter', function () {
+        playSound('menu-tick');
+    });
+
+    $('#contactBtn').on('click', function () {
+        playSound('menu-link');
+    });
+
+    // let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    //
+    // if (audioContext.state === 'suspended') {
+    //     audioContext.resume();
+    // }
+
+    // setTimeout(function() {
+    //     var input = $('#email');
+    //     console.log(input);
+    //     input.focus();
+    //
+    //     var e = jQuery.Event('keydown', {
+    //         key: 'a',       // The key that you want to simulate
+    //         keyCode: 65,    // The keyCode for 'a'
+    //         which: 65,      // The which property also represents the keyCode
+    //         charCode: 65
+    //     });
+    //
+    //     // Trigger the keydown event on the input field
+    //     input.trigger(e);
+    //
+    //     // Optionally, handle the keydown event to see the effect
+    //     input.on('keydown', function(event) {
+    //         console.log('Key pressed:', event.key);
+    //     });
+    // }, 2000);
 });
