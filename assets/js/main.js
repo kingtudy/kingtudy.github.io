@@ -86,14 +86,14 @@ function updateSun() {
     sun.setFromSphericalCoords( 1, phi, theta );
 
     sky.material.uniforms[ 'sunPosition' ].value.copy( sun );
-    // water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
+    water.material.uniforms[ 'sunDirection' ].value.copy( sun ).normalize();
     // water.material.uniforms[ 'fireDirection' ].value.copy( particleScene ).normalize();
 
     if(sun.y < 0){
         if(!scene.getObjectByName('stars')) {
             scene.add(stars);
         }
-        sun.intensity = 0;
+        // sun.intensity = 0;
         // renderer.toneMappingExposure = 0.3;
         // sky.material.uniforms[ 'turbidity' ].value = 0;
         // sky.material.uniforms[ 'rayleigh' ].value = 0.1;
@@ -103,7 +103,7 @@ function updateSun() {
         if(scene.getObjectByName('stars')) {
             scene.remove(stars);
         }
-        sun.intensity = 1;
+        // sun.intensity = 1;
         // renderer.toneMappingExposure = 1;
         // sky.material.uniforms[ 'turbidity' ].value = 10;
         // sky.material.uniforms[ 'rayleigh' ].value = 4;
@@ -140,16 +140,6 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
 
 scene.add(moon);
 scene.add(planet);
-
-
-//Illuminating the fires
-// const boardLight = new THREE.PointLight( 0xff0000, 10, 100 );
-// scene.add(boardLight);
-// boardLight.position.set(-1080, 140, -2200);
-//
-// const helper = new THREE.PointLightHelper( boardLight, 100 );
-// scene.add( helper );
-
 
 
 meLoader().then((me) => {

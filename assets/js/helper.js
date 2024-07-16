@@ -108,6 +108,14 @@ $(document).ready(function() {
 
     //Sounds Shit
 
+    $('.social-item').on('mouseenter', function () {
+        playSound('menu-tick');
+    });
+
+    $('.social-item').on('click', function () {
+        playSound('menu-link');
+    });
+
     $('.menu-option-container').on('click', function () {
         playSound('menu-open');
     });

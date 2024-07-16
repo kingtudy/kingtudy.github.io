@@ -1,6 +1,5 @@
 import { scene } from './scene.js';
 import { Water } from 'three/addons/objects/Water.js';
-// import { Water2 } from 'three/addons/objects/Water2.js';
 import * as THREE from 'three';
 
 const waterGeometry = new THREE.PlaneGeometry( 10000, 10000 );
@@ -30,24 +29,24 @@ water.rotation.x = - Math.PI / 2;
 water.material.onBeforeCompile = (shader) => {
 
 
-        shader.vertexShader = shader.vertexShader.replace(
-            '#include <common>',
-            `
+    shader.vertexShader = shader.vertexShader.replace(
+        '#include <common>',
+        `
             #include <common>
 
             `
-        );
+    );
 
-        shader.vertexShader = shader.vertexShader.replace(
-            '#include <begin_vertex>',
-            `
+    shader.vertexShader = shader.vertexShader.replace(
+        '#include <begin_vertex>',
+        `
             #include <begin_vertex>
             transformed.z += sin(position.x * 0.1 + time) * 2.0;
             transformed.z += sin(position.y * 0.1 + time) * 2.0;
             `
-        );
+    );
 
-        water.material.userData.shader = shader;
+    water.material.userData.shader = shader;
 };
 
 export { water }
