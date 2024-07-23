@@ -1,4 +1,7 @@
 import * as THREE from "three";
+import { Flow } from 'three/addons/modifiers/CurveModifier.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import {paralaxModifiers} from './parallax.js';
 import {camera} from './camera.js';
 import {scene} from './scene.js';
@@ -58,22 +61,24 @@ meLight.name = 'meLamp';
 //Lamp cool text cooking
 const curveHandles = [];
 const initialPoints = [
-    { x: 1, y: 0, z: - 1 },
-    { x: 1, y: 0, z: 1 },
-    { x: - 1, y: 0, z: 1 },
-    { x: - 1, y: 0, z: - 1 },
+    { x: 700, y: 740, z: -1375 },
+    { x: 695, y: 725, z: -1355 },
+    { x: 675, y: 720, z: -1355 },
+    { x: 680, y: 735, z: -1375 },
 ];
 
-const boxGeometry = new THREE.BoxGeometry( 0.1, 0.1, 0.1 );
+const boxGeometry = new THREE.BoxGeometry( 1.5, 1.5, 1.5 );
 const boxMaterial = new THREE.MeshBasicMaterial();
 
+let i = 0;
+let pos = 0;
 for ( const handlePos of initialPoints ) {
-
     const handle = new THREE.Mesh( boxGeometry, boxMaterial );
     handle.position.copy( handlePos );
+    handle.rotation.y = THREE.MathUtils.degToRad(i);
     curveHandles.push( handle );
     scene.add( handle );
-
+    pos++;
 }
 
 const curve = new THREE.CatmullRomCurve3(
@@ -90,8 +95,38 @@ const line = new THREE.LineLoop(
 
 scene.add( line );
 
+let flow, flow2;
+const loader = new FontLoader();
+loader.load( './assets/fonts/Aller_Regular.json', function ( font ) {
 
+    const geometry = new TextGeometry( 'Hello three.js!', {
+        font: font,
+        size: 15.2,
+        depth: 0.15,
+        curveSegments: 12,
+        bevelEnabled: true,
+        bevelThickness: 0.02,
+        bevelSize: 0.01,
+        bevelOffset: 0,
+        bevelSegments: 5
+    } );
 
+    geometry.rotateX( Math.PI );
+
+    const material = new THREE.MeshBasicMaterial({
+        color: 0x00ff00,
+        side: THREE.DoubleSide
+    });
+
+    const objectToCurve = new THREE.Mesh( geometry, material );
+    flow = new Flow( objectToCurve );
+    flow.updateCurve( 0, curve );
+    scene.add( flow.object3D );
+
+    flow2 = new Flow( curveHandles[0] );
+    flow2.updateCurve( 0, curve );
+    scene.add( flow2.object3D );
+} );
 
 
 
@@ -169,6 +204,6 @@ function initText() {
     jumpToPage(0);
 }
 
-export {meLoader, mePosition, meText, initText, initMeLight}
+export {meLoader, mePosition, meText, initText, initMeLight, flow, flow2}
 
 
