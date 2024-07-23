@@ -13,13 +13,13 @@ function meLoader() {
         loader.load(
             './assets/img/mefrfr.png',
             function (texture) {
-                const geometry = new THREE.PlaneGeometry(80, 100);
+                const geometry = new THREE.PlaneGeometry(80, 100, 10, 10);
                 const material = new THREE.MeshStandardMaterial({
                     map: texture,
                     side: THREE.DoubleSide,
                     transparent: true,
-                    // castShadow: true,
-                    // receiveShadow: true
+                    castShadow: true,
+                    receiveShadow: true
                 });
                 const plane = new THREE.Mesh(geometry, material);
 
@@ -49,14 +49,7 @@ const meData = [
     "Have a wonderful day !"
 ];
 let forItShallOnlyHappenOnce = false;
-let meLight = new THREE.PointLight(0xffffff, 1000, 1500); // color, intensity, distance
-meLight.name = 'meLamp';
-
-
-
-
-
-
+let meLight;
 
 //Lamp cool text cooking
 const curveHandles = [];
@@ -68,11 +61,19 @@ const initialPoints = [
 ];
 
 const boxGeometry = new THREE.BoxGeometry( 1.5, 1.5, 1.5 );
-const boxMaterial = new THREE.MeshBasicMaterial();
 
 let i = 0;
 let pos = 0;
+let color = [
+    0xF25022,
+    0x7FBA00,
+    0x00A4EF,
+    0xFFB900
+]
 for ( const handlePos of initialPoints ) {
+    const boxMaterial = new THREE.MeshStandardMaterial({
+        color: color[pos]
+    });
     const handle = new THREE.Mesh( boxGeometry, boxMaterial );
     handle.position.copy( handlePos );
     handle.rotation.y = THREE.MathUtils.degToRad(i);
@@ -87,7 +88,7 @@ const curve = new THREE.CatmullRomCurve3(
 curve.curveType = 'centripetal';
 curve.closed = true;
 
-const points = curve.getPoints( 50 );
+const points = curve.getPoints( 500 );
 const line = new THREE.LineLoop(
     new THREE.BufferGeometry().setFromPoints( points ),
     new THREE.LineBasicMaterial( { color: 0x00ff00 } )
@@ -95,43 +96,51 @@ const line = new THREE.LineLoop(
 
 scene.add( line );
 
-let flow, flow2;
+let flow;
 const loader = new FontLoader();
 loader.load( './assets/fonts/Aller_Regular.json', function ( font ) {
 
-    const geometry = new TextGeometry( 'Hello three.js!', {
+    const geometry = new TextGeometry('//obj.lamp', {
         font: font,
-        size: 15.2,
-        depth: 0.15,
-        curveSegments: 12,
+        size: 5,
+        height: 0.2,
         bevelEnabled: true,
-        bevelThickness: 0.02,
-        bevelSize: 0.01,
-        bevelOffset: 0,
-        bevelSegments: 5
-    } );
+        bevelThickness: 0.05,
+        bevelSize: 0.02,
+        bevelSegments: 50
+    });
+
+    const textMaterial  = new THREE.MeshStandardMaterial({
+        color: 0x166AAB,
+        transparent: true,
+        side: THREE.DoubleSide
+    } ); // white color for the bevel
+
+    const bevelMaterial = new THREE.MeshStandardMaterial({
+        color: 0xFFC029,
+        transparent: true,
+        side: THREE.DoubleSide
+    } ); // white color for the bevel
 
     geometry.rotateX( Math.PI );
 
-    const material = new THREE.MeshBasicMaterial({
-        color: 0x00ff00,
-        side: THREE.DoubleSide
+    const objectToCurve = new THREE.Mesh( geometry, [textMaterial, bevelMaterial] );
+
+    const bevelFaceCount = geometry.parameters.options.bevelSegments * geometry.parameters.options.bevelSize * 2;
+    geometry.groups.forEach(group => {
+        if (group.materialIndex === 1) {
+            group.materialIndex = 1; // Bevel
+        } else {
+            group.materialIndex = 0; // Main text
+        }
     });
 
-    const objectToCurve = new THREE.Mesh( geometry, material );
+    objectToCurve.frustumCulled = false;
+
     flow = new Flow( objectToCurve );
     flow.updateCurve( 0, curve );
     scene.add( flow.object3D );
-
-    flow2 = new Flow( curveHandles[0] );
-    flow2.updateCurve( 0, curve );
-    scene.add( flow2.object3D );
 } );
-
-
-
-
-
 
 function jumpToPage(pageNr) {
     index = pageNr;
@@ -165,6 +174,8 @@ function displayText() {
 
 function initMeLight() {
     if (!scene.getObjectByName('meLamp')) {
+        meLight = new THREE.PointLight(0xffffff, 1000, 1500); // color, intensity, distance
+        meLight.name = 'meLamp';
         meLight.position.set(685, 730, -1365);
         scene.add(meLight);
         const pointLightHelper = new THREE.PointLightHelper(meLight, 3);
@@ -204,6 +215,6 @@ function initText() {
     jumpToPage(0);
 }
 
-export {meLoader, mePosition, meText, initText, initMeLight, flow, flow2}
+export {meLoader, mePosition, meText, initText, initMeLight, flow}
 
 

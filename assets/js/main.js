@@ -13,7 +13,7 @@ import { objectManipulation } from './transform_controls.js';
 import { objectLoader, objectInit } from './object_handler.js';
 import { effect, paralaxModifiers } from "./parallax.js";
 import "./raycaster.js";
-import { initMeLight, flow, flow2, meLoader, mePosition } from "./me.js";
+import { initMeLight, flow, meLoader, mePosition } from "./me.js";
 
 //The Creation
 import { sky, sun, moon, updateMoonPosition, stars, planet, updatePlanetPosition } from './sky.js';
@@ -289,10 +289,6 @@ function animate() {
     if ( flow ) {
         flow.moveAlongCurve( 0.001 );
     }
-
-    // if ( flow2 ) {
-    //     flow2.moveAlongCurve( 0.01 );
-    // }
 }
 
 // camera.position.x += ( paralaxModifiers.x - mouseX - camera.position.x ) * .05;

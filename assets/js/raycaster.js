@@ -24,6 +24,7 @@ function onObjMouseClick(event) {
                 paralaxModifiers.x = 700;
 
                 camera.position.z = intersect.object.position.z + 100;
+                camera.layers.enableAll();
 
                 sceneManipulator.target.copy(intersect.object.position);
                 sceneManipulator.update();
