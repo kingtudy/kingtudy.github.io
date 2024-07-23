@@ -1,6 +1,6 @@
 //Core
 import * as THREE from 'three';
-// import './mouse_magic.js';
+import './mouseMagic.js';
 
 //Project
 import { camera } from './camera.js';
@@ -11,13 +11,16 @@ import { renderer } from './renderer.js';
 import { sceneManipulator } from './orbit_controls.js';
 import { objectManipulation } from './transform_controls.js';
 import { objectLoader, objectInit } from './object_handler.js';
+import { effect, paralaxModifiers } from "./parallax.js";
+import "./raycaster.js";
+import { initMeLight } from "./me.js";
 
 //The Creation
 import { sky, sun, moon, updateMoonPosition, stars, planet, updatePlanetPosition } from './sky.js';
 import { water } from './ocean.js';
 // import { smokeEngine } from './smoke.js';
-import { meLoader } from './me.js';
-import { pdaLoader } from './pda.js';
+import { meLoader, mePosition } from './me.js';
+// import { pdaLoader } from './pda.js';
 import './audio_handler.js';
 
 //Vars
@@ -25,7 +28,6 @@ let aurora, particleScene;
 const pointer = new THREE.Vector2();
 const particleCount = 500;
 let clock = new THREE.Clock();
-
 
 function onWindowResize() {
     //Set aspect ratio
@@ -37,6 +39,9 @@ function onWindowResize() {
 
     //Reset renderer
     renderer.setSize( window.innerWidth, window.innerHeight );
+
+    //Reset Effect
+    effect.setSize( window.innerWidth, window.innerHeight );
 }
 
 function onPointerMove( event ) {
@@ -92,6 +97,8 @@ function updateSun() {
     if(sun.y < 0){
         if(!scene.getObjectByName('stars')) {
             scene.add(stars);
+            fog = new THREE.Fog( 0x757575, - 100, 10000 );
+            scene.fog = fog;
         }
         // sun.intensity = 0;
         // renderer.toneMappingExposure = 0.3;
@@ -102,6 +109,8 @@ function updateSun() {
     } else {
         if(scene.getObjectByName('stars')) {
             scene.remove(stars);
+            fog = new THREE.Fog( 0x757575, - 100, 5000 );
+            scene.fog = fog;
         }
         // sun.intensity = 1;
         // renderer.toneMappingExposure = 1;
@@ -125,7 +134,6 @@ updateSun();
 
 sceneManipulator.enabled = false;
 
-
 //Load Aurora
 objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_0.jpeg', './assets/img/textures/Tex_RGB_1.jpeg'], 0)
     .then((object) => {
@@ -134,6 +142,10 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
         aurora.rotation.y = -1.04;
         aurora.rotation.z = 2.81;
         scene.add(aurora);
+
+        // sceneManipulator.target.y(aurora.position.y);
+        // sceneManipulator.update();
+
         // objectManipulation.setMode('rotate');
         // objectManipulation.attach(aurora);
     });
@@ -141,10 +153,23 @@ objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_
 scene.add(moon);
 scene.add(planet);
 
-
 meLoader().then((me) => {
+    const textElem = $('#meTextbox')[0];
+    // console.log(textElem);
+    let canvas = document.querySelector('canvas');
+    let canvasWidthHalf = canvas.width / 2;
+    let canvasHeightHalf = canvas.height / 2;
+    me.name = 'me';
     scene.add(me);
+    mePosition.setFromMatrixPosition(me.matrixWorld);
+    mePosition.project(camera);
+    mePosition.x = (mePosition.x * canvasWidthHalf) + canvasWidthHalf + 100;
+    mePosition.y = - (mePosition.y * canvasHeightHalf) + canvasHeightHalf - 850;
+    textElem.style.top = `${mePosition.y}px`;
+    textElem.style.left = `${mePosition.x}px`;
 });
+
+initMeLight();
 
 // pdaLoader().then((pda) => {
 //     scene.add(pda);
@@ -183,16 +208,35 @@ const rotationSpeed2 = 0.002; // Adjust the rotation speed as needed
 moon.rotation.z = tiltAngle;
 planet.rotation.z = tiltAngle;
 
+let mouseX = 0;
+let mouseY = 0;
+let windowHalfX = window.innerWidth / 2;
+let windowHalfY = window.innerHeight / 2;
+
+function onDocumentMouseMove( event ) {
+
+    mouseX = ( event.clientX - windowHalfX ) / 100;
+    mouseY = ( event.clientY - windowHalfY ) / 100;
+
+}
+
+document.addEventListener( 'mousemove', onDocumentMouseMove );
+
+let cameraPositionY = 1000;
+let cameraPositionZ = 2000;
+
+let fog = new THREE.Fog( 0x757575, - 100, 5000 );
+scene.fog = fog;
+
 function animate() {
-
     //FPS stabilizer - 60
-    const deltaTime = performance.now();
-
-    //If not enough time has passed since the last render, skip this frame
-    if (deltaTime < 1000 / 60) {
-        requestAnimationFrame(animate);
-        return;
-    }
+    // const deltaTime = performance.now();
+    //
+    // //If not enough time has passed since the last render, skip this frame
+    // if (deltaTime < 1000 / 60) {
+    //     requestAnimationFrame(animate);
+    //     return;
+    // }
 
     requestAnimationFrame(animate);
 
@@ -209,10 +253,27 @@ function animate() {
 
     particleScene.update();
     renderer.render(scene, camera);
+
+    // effect.render( scene, camera );
+
+    camera.position.x += ( paralaxModifiers.x - mouseX - camera.position.x ) * .05;
+    if(cameraPositionY > 50) {
+        cameraPositionY = cameraPositionY - 6;
+        camera.position.y = cameraPositionY;
+    } else {
+        camera.position.y += ( paralaxModifiers.y - mouseY - camera.position.y ) * .05;
+    }
+
+    if(cameraPositionZ > 100) {
+        cameraPositionZ = cameraPositionZ - 11;
+        camera.position.z = cameraPositionZ;
+    }
+
     particleScene.render();
+
     sceneManipulator.update();
 
-    var dt = clock.getDelta();
+    // var dt = clock.getDelta();
     // smokeEngine.update( dt * 0.5 );
     t += 0.003;
     t2 += 0.003;
@@ -226,7 +287,15 @@ function animate() {
     // console.log(sunPos);
 }
 
-//Goto the place where everything happens
-animate();
+// camera.position.x += ( paralaxModifiers.x - mouseX - camera.position.x ) * .05;
+// camera.position.y += ( paralaxModifiers.y - mouseY - camera.position.y ) * .05;
+// camera.updateProjectionMatrix();
 
-console.log(THREE.REVISION);
+//Goto the place where everything happens
+$(window).on("load", function() {
+    animate();
+});
+
+
+//Check THREE.js version
+// console.log(THREE.REVISION);

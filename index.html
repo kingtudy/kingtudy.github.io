@@ -32,6 +32,9 @@
 
     <!--  UI magic  -->
     <script type="module" src="./assets/js/helper.js"></script>
+
+    <!--  Fucking garbage animation library  -->
+    <script src="./assets/core/TweenMax/gsap.min.js"></script>
 </head>
 <body>
 
@@ -129,6 +132,29 @@
                 <div class="modal-footer">
                     <button type="button" class="subnautica-btn back-btn" data-bs-dismiss="modal">Back</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="cursor" class="Cursor"></div>
+<div id="meTextbox" class="me-textbox">
+    <div id="meText" class="me-text"></div>
+    <div class="d-flex justify-content-between">
+        <div class="col-md-5">
+            <div style="background-image: url('./assets/img/textures/menu_option_alt.png');" class="me-buttons menu-option-box-texture subnautica-font" id="mePrev">
+                Prev
+            </div>
+        </div>
+        <div id="goBackToWhereIWas" class="col-md-2 d-flex justify-content-center align-items-center">
+            <div class="w-2 h-2 menu-option-circle-outer">
+                <div class="w-2 h-2 menu-option-circle-inner">
+                    <img class="me-back img-responsive" src="./assets/img/icons/house.svg" alt="me-back" />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="me-buttons subnautica-font menu-option-box-texture" id="meNext">
+                Next
             </div>
         </div>
     </div>

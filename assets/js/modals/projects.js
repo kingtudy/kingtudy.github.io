@@ -54,8 +54,16 @@ const projectsContent = [
                 '<p class="subnautica-content-font description">' + description + '</p>' +
 
                 '<div class="display-slider-container">' +
-                    '<div class="row" id="displaySliderContainer">' +
+                    '<h3 class="subnautica-font inter-section-custom-margin">Gallery:</h3>' +
+
+                    '<div id="slickPrevCustom" class="slick-prev">' +
+                        '<img class="slick-prev-img" src="./assets/img/icons/prev-alt.gif" alt="prev-ico" />' +
+                    '</div>' +
+                    '<div class="display-slider-container-inner" id="displaySliderContainer">' +
                         sliderData +
+                    '</div>' +
+                    '<div id="slickNextCustom" class="slick-next">' +
+                        '<img class="slick-next-img" src="./assets/img/icons/next-alt.gif" alt="next-ico" />' +
                     '</div>' +
                 '</div>' +
 
@@ -63,7 +71,7 @@ const projectsContent = [
             '</div>' +
 
             '<div class="display-content">' +
-                'Fuck you' +
+                'TBD' +
             '</div>' +
         '</div>' +
     '</div>'
