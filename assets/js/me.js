@@ -103,7 +103,7 @@ loader.load( './assets/fonts/Aller_Regular.json', function ( font ) {
     const geometry = new TextGeometry('//obj.lamp', {
         font: font,
         size: 5,
-        height: 0.2,
+        depth: 0.2,
         bevelEnabled: true,
         bevelThickness: 0.05,
         bevelSize: 0.02,

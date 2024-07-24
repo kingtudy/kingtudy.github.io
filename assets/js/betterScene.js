@@ -53,8 +53,8 @@ export class Scene {
         let smokeScale = 500;
         let flamePosition = new THREE.Vector3(130, 580, -1582);
         let smokePosition = new THREE.Vector3(130, 680, -1582);
-        this.manager.addParticleSystem(this.setupBaseSmoke(scale, smokePosition));
-        this.manager.addParticleSystem(this.setupSmoke(smokeScale, flamePosition));
+        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition));
+        // this.manager.addParticleSystem(this.setupSmoke(smokeScale, flamePosition));
         this.manager.addParticleSystem(this.setupEmbers(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBaseFlame(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBrightFLame(scale, flamePosition));
@@ -62,7 +62,6 @@ export class Scene {
         scale = 80;
         flamePosition = new THREE.Vector3(-150, 50, -1800);
         this.manager.addParticleSystem(this.setupBaseSmoke(scale, flamePosition));
-        this.manager.addParticleSystem(this.setupSmoke(scale, flamePosition));
         this.manager.addParticleSystem(this.setupEmbers(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBaseFlame(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBrightFLame(scale, flamePosition));
@@ -70,7 +69,6 @@ export class Scene {
         scale = 50;
         flamePosition = new THREE.Vector3(-460, 1100, -2975);
         this.manager.addParticleSystem(this.setupBaseSmoke(scale, flamePosition));
-        this.manager.addParticleSystem(this.setupSmoke(scale, flamePosition));
         this.manager.addParticleSystem(this.setupEmbers(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBaseFlame(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBrightFLame(scale, flamePosition));
@@ -83,20 +81,20 @@ export class Scene {
         const texturePath = './assets/img/textures/base_smoke.png';
         const baseSmokeTexture = new THREE.TextureLoader().load(texturePath);
         const baseSmokeAtlas = new Photons.Atlas(baseSmokeTexture, texturePath);
-        baseSmokeAtlas.addFrameSet(28, 0.0, 0.0, 0.166, 0.2);
+        baseSmokeAtlas.addFrameSet(16, 0.0, 0.0, 0.166, 0.2);
         const baseSmokeRenderer = new Photons.AnimatedSpriteRenderer(this.instancedParticleSystems, baseSmokeAtlas, true);
 
         const baseSmokeParticleSystem = new Photons.ParticleSystem(baseSmokeRoot, baseSmokeRenderer, this.renderer);
-        baseSmokeParticleSystem.init(50);
+        baseSmokeParticleSystem.init(1000);
 
-        baseSmokeParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(10));
+        baseSmokeParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(30));
 
-        baseSmokeParticleSystem.addParticleSequence(0, 18);
+        baseSmokeParticleSystem.addParticleSequence(0, 16);
         const baseSmokeParticleSequences = baseSmokeParticleSystem.getParticleSequences();
 
-        baseSmokeParticleSystem.addParticleStateInitializer(new Photons.LifetimeInitializer(0.0, 0.0, 0.0, 0.0, false));
+        baseSmokeParticleSystem.addParticleStateInitializer(new Photons.LifetimeInitializer(10.0, 5.0, 0.0, 0.0, false));
         baseSmokeParticleSystem.addParticleStateInitializer(new Photons.RotationInitializer(new Photons.RandomGenerator(0, Math.PI / 2.0, -Math.PI / 2.0, 0.0, 0.0, false)));
-        baseSmokeParticleSystem.addParticleStateInitializer(new Photons.RotationalSpeedInitializer(1.0, -1.0, 0.0, 0.0, false));
+        baseSmokeParticleSystem.addParticleStateInitializer(new Photons.RotationalSpeedInitializer(0.5, -0.5, 0.0, 0.0, false));
         baseSmokeParticleSystem.addParticleStateInitializer(new Photons.SizeInitializer(
             new Photons.RandomGenerator(THREE.Vector2,
                 new THREE.Vector2(0.25 * scale, 0.25 * scale),
@@ -109,7 +107,7 @@ export class Scene {
         baseSmokeParticleSystem.addParticleStateInitializer(new Photons.RandomVelocityInitializer(
             new THREE.Vector3(0.05 * scale, 0.4 * scale, 0.05 * scale),
             new THREE.Vector3(-0.025 * scale, 0.8 * scale, -0.025 * scale),
-            0.35 * scale, 0.5 * scale, false));
+            0.35 * scale, 0.5 * scale, true));
         baseSmokeParticleSystem.addParticleStateInitializer(new Photons.SequenceInitializer(baseSmokeParticleSequences));
 
         baseSmokeParticleSystem.addParticleStateOperator(new Photons.SequenceOperator(baseSmokeParticleSequences, 0.07, false));
@@ -137,8 +135,9 @@ export class Scene {
         ]);
 
         baseSmokeParticleSystem.addParticleStateOperator(new Photons.AccelerationOperator(
-            new Photons.RandomGenerator(THREE.Vector3, new THREE.Vector3(0.0, 0.0, 0.0),
-                new THREE.Vector3(0.0, 1.5 * scale, 0.0),
+            new Photons.RandomGenerator(THREE.Vector3,
+                new THREE.Vector3(0.0, 0.0, 0.0),
+                new THREE.Vector3(5.0 * scale, 4.5 * scale, 5.0 * scale),
                 0.0, 0.0, false)));
 
         baseSmokeParticleSystem.setSimulateInWorldSpace(true);
@@ -147,62 +146,62 @@ export class Scene {
         return baseSmokeParticleSystem;
     }
 
-    setupSmoke(scale,position) {
-        const smokeRoot = new THREE.Object3D();
-        smokeRoot.position.copy(position);
-
-        const texturePath = './assets/img/textures/smoke.png';
-        const smokeTexture = new THREE.TextureLoader().load(texturePath);
-        const smokeAtlas = new Photons.Atlas(smokeTexture, texturePath);
-        smokeAtlas.addFrameSet(1, 0.0, 0.0, 1.0, 1.0);
-        const smokeRenderer = new Photons.AnimatedSpriteRenderer(this.instancedParticleSystems, smokeAtlas, true, THREE.AdditiveBlending);
-
-        const smokeParticleSystem = new Photons.ParticleSystem(smokeRoot, smokeRenderer, this.renderer);
-        smokeParticleSystem.init(5000);
-
-        smokeParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(60));
-
-        const sizeInitializerGenerator = new Photons.RandomGenerator(THREE.Vector2,
-            new THREE.Vector2(0.0, 0.0),
-            new THREE.Vector2(scale * 0.15, scale * 0.15),
-            0.0, 0.0, false);
-        smokeParticleSystem.addParticleStateInitializer(new Photons.LifetimeInitializer(10.0, 1.0, 0.0, 0.0, false));
-        smokeParticleSystem.addParticleStateInitializer(new Photons.SizeInitializer(sizeInitializerGenerator));
-        smokeParticleSystem.addParticleStateInitializer(new Photons.BoxPositionInitializer(
-            new THREE.Vector3(0.05 * scale, 0.0, 0.05 * scale),
-            new THREE.Vector3(-0.025 * scale, 0.0, -0.025 * scale)));
-        smokeParticleSystem.addParticleStateInitializer(new Photons.RandomVelocityInitializer(
-            new THREE.Vector3(0.4 * scale, 0.5 * scale, 0.4 * scale),
-            new THREE.Vector3(-0.2 * scale, 0.8 * scale, -0.2 * scale),
-            3.6 * scale, 0.8 * scale, false));
-
-        const smokeOpacityOperator = smokeParticleSystem.addParticleStateOperator(new Photons.OpacityInterpolatorOperator());
-        smokeOpacityOperator.addElements([
-            [0.0, 0.0],
-            [0.7, 0.25],
-            [0.9, 0.75],
-            [0.0, 1.0]
-        ]);
-
-        const smokeColorOperator = smokeParticleSystem.addParticleStateOperator(new Photons.ColorInterpolatorOperator(true));
-        smokeColorOperator.addElementsFromParameters([
-            [[0.0, 0.0, 0.0], 0.0],
-            [[0.0, 0.0, 0.0], 0.5],
-            [[0.0, 0.0, 0.0], 1.0]
-        ]);
-
-        const acceleratorOperatorGenerator = new Photons.SphereRandomGenerator(Math.PI * 2.0, 0.0, Math.PI,
-            -Math.PI / 2, 20.0, -8,
-            scale, scale, scale,
-            0.0, 0.0, 0.0);
-
-        smokeParticleSystem.addParticleStateOperator(new Photons.AccelerationOperator(acceleratorOperatorGenerator));
-
-        smokeParticleSystem.setSimulateInWorldSpace(true);
-        smokeParticleSystem.start();
-
-        return smokeParticleSystem;
-    }
+    // setupSmoke(scale,position) {
+    //     const smokeRoot = new THREE.Object3D();
+    //     smokeRoot.position.copy(position);
+    //
+    //     const texturePath = './assets/img/textures/smoke.png';
+    //     const smokeTexture = new THREE.TextureLoader().load(texturePath);
+    //     const smokeAtlas = new Photons.Atlas(smokeTexture, texturePath);
+    //     smokeAtlas.addFrameSet(18, 0.0, 0.0, 1.0, 1.0);
+    //     const smokeRenderer = new Photons.AnimatedSpriteRenderer(this.instancedParticleSystems, smokeAtlas, true, THREE.AdditiveBlending);
+    //
+    //     const smokeParticleSystem = new Photons.ParticleSystem(smokeRoot, smokeRenderer, this.renderer);
+    //     smokeParticleSystem.init(5000);
+    //
+    //     smokeParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(60));
+    //
+    //     const sizeInitializerGenerator = new Photons.RandomGenerator(THREE.Vector2,
+    //         new THREE.Vector2(0.0, 0.0),
+    //         new THREE.Vector2(scale * 0.15, scale * 0.15),
+    //         0.0, 0.0, false);
+    //     smokeParticleSystem.addParticleStateInitializer(new Photons.LifetimeInitializer(10.0, 1.0, 0.0, 0.0, false));
+    //     smokeParticleSystem.addParticleStateInitializer(new Photons.SizeInitializer(sizeInitializerGenerator));
+    //     smokeParticleSystem.addParticleStateInitializer(new Photons.BoxPositionInitializer(
+    //         new THREE.Vector3(0.05 * scale, 0.0, 0.05 * scale),
+    //         new THREE.Vector3(-0.025 * scale, 0.0, -0.025 * scale)));
+    //     smokeParticleSystem.addParticleStateInitializer(new Photons.RandomVelocityInitializer(
+    //         new THREE.Vector3(0.4 * scale, 0.5 * scale, 0.4 * scale),
+    //         new THREE.Vector3(-0.2 * scale, 0.8 * scale, -0.2 * scale),
+    //         3.6 * scale, 0.8 * scale, false));
+    //
+    //     const smokeOpacityOperator = smokeParticleSystem.addParticleStateOperator(new Photons.OpacityInterpolatorOperator());
+    //     smokeOpacityOperator.addElements([
+    //         [0.0, 0.0],
+    //         [0.7, 0.25],
+    //         [0.9, 0.75],
+    //         [0.0, 1.0]
+    //     ]);
+    //
+    //     const smokeColorOperator = smokeParticleSystem.addParticleStateOperator(new Photons.ColorInterpolatorOperator(true));
+    //     smokeColorOperator.addElementsFromParameters([
+    //         [[0.0, 0.0, 0.0], 0.0],
+    //         [[0.0, 0.0, 0.0], 0.5],
+    //         [[0.0, 0.0, 0.0], 1.0]
+    //     ]);
+    //
+    //     const acceleratorOperatorGenerator = new Photons.SphereRandomGenerator(Math.PI * 2.0, 0.0, Math.PI,
+    //         -Math.PI / 2, 20.0, -8,
+    //         scale, scale, scale,
+    //         0.0, 0.0, 0.0);
+    //
+    //     smokeParticleSystem.addParticleStateOperator(new Photons.AccelerationOperator(acceleratorOperatorGenerator));
+    //
+    //     smokeParticleSystem.setSimulateInWorldSpace(true);
+    //     smokeParticleSystem.start();
+    //
+    //     return smokeParticleSystem;
+    // }
 
     setupEmbers(scale, position) {
         const embersRoot = new THREE.Object3D();
