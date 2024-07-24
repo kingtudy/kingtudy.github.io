@@ -29,6 +29,7 @@ let aurora, particleScene;
 const pointer = new THREE.Vector2();
 const particleCount = 500;
 let clock = new THREE.Clock();
+let cloudMaterial;
 
 function onWindowResize() {
     //Set aspect ratio
@@ -98,8 +99,10 @@ function updateSun() {
     if(sun.y < 0){
         if(!scene.getObjectByName('stars')) {
             scene.add(stars);
-            fog = new THREE.Fog( 0x757575, - 100, 10000 );
+            fog = new THREE.Fog( 0xffffff, 100000, 100000 );
             scene.fog = fog;
+            cloudMaterial.uniforms.fogNear.value = -100;
+            cloudMaterial.uniforms.fogNear.needsUpdate = true;
         }
         // sun.intensity = 0;
         // renderer.toneMappingExposure = 0.3;
@@ -112,6 +115,9 @@ function updateSun() {
             scene.remove(stars);
             fog = new THREE.Fog( 0x757575, - 100, 5000 );
             scene.fog = fog;
+            cloudMaterial.uniforms.fogNear.value = getRandomArbitrary(1000,8000);
+            cloudMaterial.uniforms.fogNear.needsUpdate = true;
+
         }
         // sun.intensity = 1;
         // renderer.toneMappingExposure = 1;
@@ -225,13 +231,14 @@ document.addEventListener( 'mousemove', onDocumentMouseMove );
 let cameraPositionY = 1000;
 let cameraPositionZ = 2000;
 
-let fog = new THREE.Fog( 0x757575, - 100, 50000 );
+let fog = new THREE.Fog( 0x757575, - 100, 5000 );
 scene.fog = fog;
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+let planeGeos;
 
 cloudLoader('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png').then((t) => {
     let cloudGeometry = new THREE.BufferGeometry();
@@ -240,12 +247,12 @@ cloudLoader('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png').then((
     cloudTexture.magFilter = THREE.LinearMipMapLinearFilter;
     cloudTexture.minFilter = THREE.LinearMipMapLinearFilter;
 
-    let cloudMaterial = new THREE.ShaderMaterial({
+    cloudMaterial = new THREE.ShaderMaterial({
         uniforms: {
             "map": {type: "t", value: cloudTexture},
             "fogColor": {type: "c", value: fog.color},
-            "fogNear": {type: "f", value: fog.near},
-            "fogFar": {type: "f", value: fog.far},
+            "fogNear": {type: "f", value: 8000},
+            "fogFar": {type: "f", value: 10000},
         },
         vertexShader: cloudShader.vertexShader,
         fragmentShader: cloudShader.fragmentShader,
@@ -258,13 +265,14 @@ cloudLoader('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png').then((
     let planeObj = new THREE.Object3D();
     const geometries = [];
 
-    for (let i = 0; i < 100; i++) {
-        planeObj.position.x = getRandomArbitrary(-3000, 3000);
-        planeObj.position.y = -Math.random() * Math.random() * 2000 + 2000;
-        planeObj.position.z = Math.random() * 2000 - 6000;
+    for (let i = 0; i < 80; i++) {
+        planeObj.position.x = getRandomArbitrary(-10000, 10000);
+        planeObj.position.y = -Math.random() * Math.random() * 200 + 3500;
+        planeObj.position.z = Math.random() * 4000 - 6000;
 
-        planeObj.rotation.z = Math.random() * Math.PI;
-        planeObj.scale.x = planeObj.scale.y = Math.random() * Math.random() * 10.5 + 0.5;
+        // planeObj.rotation.z = Math.random() * Math.PI;
+        planeObj.scale.x = getRandomArbitrary(4, 30);
+        planeObj.scale.y = planeObj.scale.x;
         planeObj.updateMatrix();
 
         const clonedPlaneGeo = planeGeo.clone();
@@ -272,8 +280,8 @@ cloudLoader('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png').then((
 
         geometries.push(clonedPlaneGeo);
     }
-    console.log(geometries);
-    const planeGeos = BufferGeometryUtils.mergeGeometries(geometries);
+    // console.log(geometries);
+    planeGeos = BufferGeometryUtils.mergeGeometries(geometries);
     const planesMesh = new THREE.Mesh(planeGeos, cloudMaterial);
     planesMesh.renderOrder = 0;
 
@@ -284,6 +292,19 @@ cloudLoader('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png').then((
     scene.add(planesMesh);
     scene.add(planesMeshA);
 });
+
+
+const animateClouds = function () {
+    const positions = planeGeos.attributes.position.array;
+    for (let i = 0; i < positions.length; i += 3) {
+        positions[i] += 2; // Move along X-axis
+        if (positions[i] > 8000) { // Reset position to create looping effect
+            positions[i] = -8000;
+        }
+    }
+    planeGeos.attributes.position.needsUpdate = true; // Mark the attribute for update
+};
+
 
 
 
@@ -349,8 +370,10 @@ function animate() {
 
     //Animate lantern text
     if ( flow ) {
-        flow.moveAlongCurve( 0.001 );
+        flow.moveAlongCurve( 0.004 );
     }
+
+    animateClouds();
 }
 
 // camera.position.x += ( paralaxModifiers.x - mouseX - camera.position.x ) * .05;

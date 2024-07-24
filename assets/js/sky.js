@@ -83,16 +83,16 @@ const planetMaterial = new THREE.MeshStandardMaterial({
     map: planetTexture
 });
 const planet = new THREE.Mesh(planetGeometry, planetMaterial);
-let planetScale = 900;
+let planetScale = 1800;
 planet.scale.set(planetScale, planetScale, planetScale);
 
 function updatePlanetPosition(t) {
     const centerZ = 0;
-    const centerY = (4200 + 100 - 3000) / 2 - 100;
+    const centerY = 1100;
 
     // Define the radii of the oval
-    const radiusZ = 5500;
-    const radiusY = (4200 + 1000) / 2;
+    const radiusZ = 11000;
+    const radiusY = 5200;
 
     // Calculate the position of the point on the oval
     const zPlanet = centerZ + radiusZ * Math.cos(-t);
