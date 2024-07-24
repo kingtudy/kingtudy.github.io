@@ -1,5 +1,6 @@
 //Core
 import * as THREE from 'three';
+import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 import './mouseMagic.js';
 
 //Project
@@ -18,6 +19,7 @@ import { initMeLight, flow, meLoader, mePosition } from "./me.js";
 //The Creation
 import { sky, sun, moon, updateMoonPosition, stars, planet, updatePlanetPosition } from './sky.js';
 import { water } from './ocean.js';
+import { cloudLoader, cloudShader } from './cumulonimbus.js';
 // import { smokeEngine } from './smoke.js';
 // import { pdaLoader } from './pda.js';
 import './audio_handler.js';
@@ -134,20 +136,19 @@ updateSun();
 sceneManipulator.enabled = false;
 
 //Load Aurora
-objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_0.jpeg', './assets/img/textures/Tex_RGB_1.jpeg'], 0)
-    .then((object) => {
-        aurora = objectInit(object, "aurora", 2, -1000, -54, -3622);
-        aurora.rotation.x = 2.96;
-        aurora.rotation.y = -1.04;
-        aurora.rotation.z = 2.81;
-        scene.add(aurora);
+objectLoader('./assets/obj/aurora_crashed.fbx', ['./assets/img/textures/Tex_RGB_0.jpeg', './assets/img/textures/Tex_RGB_1.jpeg'], 0).then((object) => {
+    aurora = objectInit(object, "aurora", 2, -1000, -54, -3622);
+    aurora.rotation.x = 2.96;
+    aurora.rotation.y = -1.04;
+    aurora.rotation.z = 2.81;
+    scene.add(aurora);
 
-        // sceneManipulator.target.y(aurora.position.y);
-        // sceneManipulator.update();
+    // sceneManipulator.target.y(aurora.position.y);
+    // sceneManipulator.update();
 
-        // objectManipulation.setMode('rotate');
-        // objectManipulation.attach(aurora);
-    });
+    // objectManipulation.setMode('rotate');
+    // objectManipulation.attach(aurora);
+});
 
 scene.add(moon);
 scene.add(planet);
@@ -224,8 +225,69 @@ document.addEventListener( 'mousemove', onDocumentMouseMove );
 let cameraPositionY = 1000;
 let cameraPositionZ = 2000;
 
-let fog = new THREE.Fog( 0x757575, - 100, 5000 );
+let fog = new THREE.Fog( 0x757575, - 100, 50000 );
 scene.fog = fog;
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+
+cloudLoader('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png').then((t) => {
+    let cloudGeometry = new THREE.BufferGeometry();
+
+    let cloudTexture = t;
+    cloudTexture.magFilter = THREE.LinearMipMapLinearFilter;
+    cloudTexture.minFilter = THREE.LinearMipMapLinearFilter;
+
+    let cloudMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+            "map": {type: "t", value: cloudTexture},
+            "fogColor": {type: "c", value: fog.color},
+            "fogNear": {type: "f", value: fog.near},
+            "fogFar": {type: "f", value: fog.far},
+        },
+        vertexShader: cloudShader.vertexShader,
+        fragmentShader: cloudShader.fragmentShader,
+        depthWrite: false,
+        depthTest: true,
+        transparent: true,
+    });
+
+    const planeGeo = new THREE.PlaneGeometry(64, 64);
+    let planeObj = new THREE.Object3D();
+    const geometries = [];
+
+    for (let i = 0; i < 100; i++) {
+        planeObj.position.x = getRandomArbitrary(-3000, 3000);
+        planeObj.position.y = -Math.random() * Math.random() * 2000 + 2000;
+        planeObj.position.z = Math.random() * 2000 - 6000;
+
+        planeObj.rotation.z = Math.random() * Math.PI;
+        planeObj.scale.x = planeObj.scale.y = Math.random() * Math.random() * 10.5 + 0.5;
+        planeObj.updateMatrix();
+
+        const clonedPlaneGeo = planeGeo.clone();
+        clonedPlaneGeo.applyMatrix4(planeObj.matrix);
+
+        geometries.push(clonedPlaneGeo);
+    }
+    console.log(geometries);
+    const planeGeos = BufferGeometryUtils.mergeGeometries(geometries);
+    const planesMesh = new THREE.Mesh(planeGeos, cloudMaterial);
+    planesMesh.renderOrder = 0;
+
+    const planesMeshA = planesMesh.clone();
+    planesMeshA.position.z = -2000;
+    planesMeshA.renderOrder = 0;
+
+    scene.add(planesMesh);
+    scene.add(planesMeshA);
+});
+
+
+
+
 
 function animate() {
     //FPS stabilizer - 60
