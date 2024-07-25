@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
+
+import { fog } from './scene.js';
+import { getRandomArbitrary } from './function.js'
 
 //Le custom cloud shader
 const cloudShader = {
@@ -30,18 +34,105 @@ const cloudShader = {
 }
 
 //Prepping the cloud formation
-let tLoader = new THREE.TextureLoader()
 
-function cloudLoader(textureLink) {
-    return new Promise((resolve, reject) => {
-        tLoader.load(
-            textureLink,
-            (t) => {
-                t.colorSpace = THREE.SRGBColorSpace
-                resolve(t);
-            }
-        );
-    });
+//Cloud textures cooking
+let cloudTextureLoader = new THREE.TextureLoader();
+let cloudTextures = [
+    cloudTextureLoader.load(
+        "./assets/img/textures/cloud/cloud1.png",
+        ( tex )=>{
+            tex.magFilter = tex.minFilter = THREE.LinearMipMapLinearFilter;
+        }
+    ),
+    cloudTextureLoader.load(
+        "./assets/img/textures/cloud/cloud2.png",
+        ( tex )=>{
+            tex.magFilter = tex.minFilter = THREE.LinearMipMapLinearFilter;
+        }
+    ),
+    cloudTextureLoader.load(
+        "./assets/img/textures/cloud/cloud3.png",
+        ( tex )=>{
+            tex.magFilter = tex.minFilter = THREE.LinearMipMapLinearFilter;
+        }
+    )
+];
+
+//Cloud materials cooking
+const cloudMaterials = cloudTextures.map(
+    texture => new THREE.ShaderMaterial({
+        uniforms: {
+            "map": {type: "t", value: texture},
+            "fogColor": {type: "c", value: fog.color},
+            "fogNear": {type: "f", value: 8000},
+            "fogFar": {type: "f", value: 10000},
+        },
+        vertexShader: cloudShader.vertexShader,
+        fragmentShader: cloudShader.fragmentShader,
+        depthWrite: false,
+        depthTest: true,
+        transparent: true
+    })
+);
+
+
+const planeGeo = new THREE.PlaneGeometry(64, 64);
+let planeObj = new THREE.Object3D();
+const geometries = [];
+
+for (let i = 0; i < 80; i++) {
+    planeObj.position.x = getRandomArbitrary(-10000, 10000);
+    planeObj.position.y = -Math.random() * Math.random() * 200 + 3500;
+    planeObj.position.z = Math.random() * 4000 - 6000;
+
+    // planeObj.rotation.z = Math.random() * Math.PI;
+    planeObj.scale.x = getRandomArbitrary(4, 30);
+    planeObj.scale.y = planeObj.scale.x;
+    planeObj.updateMatrix();
+
+    const clonedPlaneGeo = planeGeo.clone();
+    clonedPlaneGeo.applyMatrix4(planeObj.matrix);
+
+    geometries.push(clonedPlaneGeo);
 }
 
-export { cloudShader, cloudLoader }
+let planeGeos = BufferGeometryUtils.mergeGeometries(geometries);
+const planesMesh = new THREE.Mesh(planeGeos, cloudMaterials);
+planesMesh.renderOrder = 0;
+
+const planesMeshA = planesMesh.clone();
+planesMeshA.position.z = -2000;
+planesMeshA.renderOrder = 0;
+
+//To animate cloud movement
+const animateClouds = function () {
+    const positions = planeGeos.attributes.position.array;
+    for (let i = 0; i < positions.length; i += 3) {
+        positions[i] += 2; // Move along X-axis
+        if (positions[i] > 8000) { // Reset position to create looping effect
+            positions[i] = -8000;
+        }
+    }
+    planeGeos.attributes.position.needsUpdate = true; // Mark the attribute for update
+};
+
+export { animateClouds, planesMesh, planesMeshA }
+
+
+
+
+// let tLoader = new THREE.TextureLoader()
+//
+// function cloudLoader(textureLink) {
+//     return new Promise((resolve, reject) => {
+//         tLoader.load(
+//             textureLink,
+//             (t) => {
+//                 t.colorSpace = THREE.SRGBColorSpace
+//                 resolve(t);
+//             }
+//         );
+//     });
+// }
+
+// export { cloudShader, cloudLoader }

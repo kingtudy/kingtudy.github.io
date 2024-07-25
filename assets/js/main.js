@@ -1,12 +1,11 @@
 //Core
 import * as THREE from 'three';
-import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 import './mouseMagic.js';
 
 //Project
 import { camera } from './camera.js';
 import { ambientLight, directionalLight } from './lighting.js';
-import { scene } from './scene.js'
+import { scene, fog } from './scene.js'
 import { Scene } from './betterScene.js'
 import { renderer } from './renderer.js';
 import { sceneManipulator } from './orbit_controls.js';
@@ -19,7 +18,7 @@ import { initMeLight, flow, meLoader, mePosition } from "./me.js";
 //The Creation
 import { sky, sun, moon, updateMoonPosition, stars, planet, updatePlanetPosition } from './sky.js';
 import { water } from './ocean.js';
-import { cloudLoader, cloudShader } from './cumulonimbus.js';
+import { animateClouds, planesMesh, planesMeshA } from './cumulonimbus.js';
 // import { smokeEngine } from './smoke.js';
 // import { pdaLoader } from './pda.js';
 import './audio_handler.js';
@@ -231,84 +230,62 @@ document.addEventListener( 'mousemove', onDocumentMouseMove );
 let cameraPositionY = 1000;
 let cameraPositionZ = 2000;
 
-let fog = new THREE.Fog( 0x757575, - 100, 5000 );
-scene.fog = fog;
+// let planeGeos;
 
-function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
-}
+//Shit to refactor
+// cloudLoader('./assets/img/textures/cloud/').then((t) => {
 
-let planeGeos;
+    // let cloudTexture = t;
+    // cloudTexture.magFilter = THREE.LinearMipMapLinearFilter;
+    // cloudTexture.minFilter = THREE.LinearMipMapLinearFilter;
 
-cloudLoader('https://mrdoob.com/lab/javascript/webgl/clouds/cloud10.png').then((t) => {
-    let cloudGeometry = new THREE.BufferGeometry();
+    // cloudMaterial = new THREE.ShaderMaterial({
+    //     uniforms: {
+    //         "map": {type: "t", value: cloudTexture},
+    //         "fogColor": {type: "c", value: fog.color},
+    //         "fogNear": {type: "f", value: 8000},
+    //         "fogFar": {type: "f", value: 10000},
+    //     },
+    //     vertexShader: cloudShader.vertexShader,
+    //     fragmentShader: cloudShader.fragmentShader,
+    //     depthWrite: false,
+    //     depthTest: true,
+    //     transparent: true,
+    // });
 
-    let cloudTexture = t;
-    cloudTexture.magFilter = THREE.LinearMipMapLinearFilter;
-    cloudTexture.minFilter = THREE.LinearMipMapLinearFilter;
-
-    cloudMaterial = new THREE.ShaderMaterial({
-        uniforms: {
-            "map": {type: "t", value: cloudTexture},
-            "fogColor": {type: "c", value: fog.color},
-            "fogNear": {type: "f", value: 8000},
-            "fogFar": {type: "f", value: 10000},
-        },
-        vertexShader: cloudShader.vertexShader,
-        fragmentShader: cloudShader.fragmentShader,
-        depthWrite: false,
-        depthTest: true,
-        transparent: true,
-    });
-
-    const planeGeo = new THREE.PlaneGeometry(64, 64);
-    let planeObj = new THREE.Object3D();
-    const geometries = [];
-
-    for (let i = 0; i < 80; i++) {
-        planeObj.position.x = getRandomArbitrary(-10000, 10000);
-        planeObj.position.y = -Math.random() * Math.random() * 200 + 3500;
-        planeObj.position.z = Math.random() * 4000 - 6000;
-
-        // planeObj.rotation.z = Math.random() * Math.PI;
-        planeObj.scale.x = getRandomArbitrary(4, 30);
-        planeObj.scale.y = planeObj.scale.x;
-        planeObj.updateMatrix();
-
-        const clonedPlaneGeo = planeGeo.clone();
-        clonedPlaneGeo.applyMatrix4(planeObj.matrix);
-
-        geometries.push(clonedPlaneGeo);
-    }
+    // const planeGeo = new THREE.PlaneGeometry(64, 64);
+    // let planeObj = new THREE.Object3D();
+    // const geometries = [];
+    //
+    // for (let i = 0; i < 80; i++) {
+    //     planeObj.position.x = getRandomArbitrary(-10000, 10000);
+    //     planeObj.position.y = -Math.random() * Math.random() * 200 + 3500;
+    //     planeObj.position.z = Math.random() * 4000 - 6000;
+    //
+    //     // planeObj.rotation.z = Math.random() * Math.PI;
+    //     planeObj.scale.x = getRandomArbitrary(4, 30);
+    //     planeObj.scale.y = planeObj.scale.x;
+    //     planeObj.updateMatrix();
+    //
+    //     const clonedPlaneGeo = planeGeo.clone();
+    //     clonedPlaneGeo.applyMatrix4(planeObj.matrix);
+    //
+    //     geometries.push(clonedPlaneGeo);
+    // }
     // console.log(geometries);
-    planeGeos = BufferGeometryUtils.mergeGeometries(geometries);
-    const planesMesh = new THREE.Mesh(planeGeos, cloudMaterial);
-    planesMesh.renderOrder = 0;
-
-    const planesMeshA = planesMesh.clone();
-    planesMeshA.position.z = -2000;
-    planesMeshA.renderOrder = 0;
-
-    scene.add(planesMesh);
-    scene.add(planesMeshA);
-});
+    // planeGeos = BufferGeometryUtils.mergeGeometries(geometries);
+    // const planesMesh = new THREE.Mesh(planeGeos, cloudMaterial);
+    // planesMesh.renderOrder = 0;
+    //
+    // const planesMeshA = planesMesh.clone();
+    // planesMeshA.position.z = -2000;
+    // planesMeshA.renderOrder = 0;
 
 
-const animateClouds = function () {
-    const positions = planeGeos.attributes.position.array;
-    for (let i = 0; i < positions.length; i += 3) {
-        positions[i] += 2; // Move along X-axis
-        if (positions[i] > 8000) { // Reset position to create looping effect
-            positions[i] = -8000;
-        }
-    }
-    planeGeos.attributes.position.needsUpdate = true; // Mark the attribute for update
-};
+// });
 
-
-
-
-
+scene.add(planesMesh);
+scene.add(planesMeshA);
 
 function animate() {
     //FPS stabilizer - 60
