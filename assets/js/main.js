@@ -18,7 +18,7 @@ import { initMeLight, flow, meLoader, mePosition } from "./me.js";
 //The Creation
 import { sky, sun, moon, updateMoonPosition, stars, planet, updatePlanetPosition } from './sky.js';
 import { water } from './ocean.js';
-import { animateClouds, planesMesh, planesMeshA } from './cumulonimbus.js';
+import { cloudMaterials, animateClouds, planesMesh, planesMeshA } from './cumulonimbus.js';
 // import { smokeEngine } from './smoke.js';
 // import { pdaLoader } from './pda.js';
 import './audio_handler.js';
@@ -28,7 +28,6 @@ let aurora, particleScene;
 const pointer = new THREE.Vector2();
 const particleCount = 500;
 let clock = new THREE.Clock();
-let cloudMaterial;
 
 function onWindowResize() {
     //Set aspect ratio
@@ -98,10 +97,13 @@ function updateSun() {
     if(sun.y < 0){
         if(!scene.getObjectByName('stars')) {
             scene.add(stars);
-            fog = new THREE.Fog( 0xffffff, 100000, 100000 );
-            scene.fog = fog;
-            cloudMaterial.uniforms.fogNear.value = -100;
-            cloudMaterial.uniforms.fogNear.needsUpdate = true;
+            fog.value = new THREE.Fog( 0xffffff, 100000, 100000 );
+            scene.fog = fog.value;
+            cloudMaterials.forEach(material => {
+                material.uniforms.fogNear.value = -100;
+                material.uniforms.fogFar.value = 8000;
+                material.uniforms.opacity.value = 0.2;
+            });
         }
         // sun.intensity = 0;
         // renderer.toneMappingExposure = 0.3;
@@ -112,11 +114,13 @@ function updateSun() {
     } else {
         if(scene.getObjectByName('stars')) {
             scene.remove(stars);
-            fog = new THREE.Fog( 0x757575, - 100, 5000 );
-            scene.fog = fog;
-            cloudMaterial.uniforms.fogNear.value = getRandomArbitrary(1000,8000);
-            cloudMaterial.uniforms.fogNear.needsUpdate = true;
-
+            fog.value = new THREE.Fog( 0x757575, - 100, 5000 );
+            scene.fog = fog.value;
+            cloudMaterials.forEach(material => {
+                material.uniforms.fogNear.value = 8000;
+                material.uniforms.fogFar.value = 10000;
+                material.uniforms.opacity.value = 0.5;
+            });
         }
         // sun.intensity = 1;
         // renderer.toneMappingExposure = 1;
@@ -230,60 +234,8 @@ document.addEventListener( 'mousemove', onDocumentMouseMove );
 let cameraPositionY = 1000;
 let cameraPositionZ = 2000;
 
-// let planeGeos;
 
-//Shit to refactor
-// cloudLoader('./assets/img/textures/cloud/').then((t) => {
-
-    // let cloudTexture = t;
-    // cloudTexture.magFilter = THREE.LinearMipMapLinearFilter;
-    // cloudTexture.minFilter = THREE.LinearMipMapLinearFilter;
-
-    // cloudMaterial = new THREE.ShaderMaterial({
-    //     uniforms: {
-    //         "map": {type: "t", value: cloudTexture},
-    //         "fogColor": {type: "c", value: fog.color},
-    //         "fogNear": {type: "f", value: 8000},
-    //         "fogFar": {type: "f", value: 10000},
-    //     },
-    //     vertexShader: cloudShader.vertexShader,
-    //     fragmentShader: cloudShader.fragmentShader,
-    //     depthWrite: false,
-    //     depthTest: true,
-    //     transparent: true,
-    // });
-
-    // const planeGeo = new THREE.PlaneGeometry(64, 64);
-    // let planeObj = new THREE.Object3D();
-    // const geometries = [];
-    //
-    // for (let i = 0; i < 80; i++) {
-    //     planeObj.position.x = getRandomArbitrary(-10000, 10000);
-    //     planeObj.position.y = -Math.random() * Math.random() * 200 + 3500;
-    //     planeObj.position.z = Math.random() * 4000 - 6000;
-    //
-    //     // planeObj.rotation.z = Math.random() * Math.PI;
-    //     planeObj.scale.x = getRandomArbitrary(4, 30);
-    //     planeObj.scale.y = planeObj.scale.x;
-    //     planeObj.updateMatrix();
-    //
-    //     const clonedPlaneGeo = planeGeo.clone();
-    //     clonedPlaneGeo.applyMatrix4(planeObj.matrix);
-    //
-    //     geometries.push(clonedPlaneGeo);
-    // }
-    // console.log(geometries);
-    // planeGeos = BufferGeometryUtils.mergeGeometries(geometries);
-    // const planesMesh = new THREE.Mesh(planeGeos, cloudMaterial);
-    // planesMesh.renderOrder = 0;
-    //
-    // const planesMeshA = planesMesh.clone();
-    // planesMeshA.position.z = -2000;
-    // planesMeshA.renderOrder = 0;
-
-
-// });
-
+//Clouds
 scene.add(planesMesh);
 scene.add(planesMeshA);
 

@@ -7,7 +7,9 @@ const scene = new THREE.Scene();
 // scene.receiveShadow = true;
 // scene.castShadow = true;
 
-let fog = new THREE.Fog( 0x757575, - 100, 5000 );
-scene.fog = fog;
+let fog = {
+    value: new THREE.Fog( 0x757575, - 100, 5000 )
+};
+scene.fog = fog.value;
 
 export { scene, fog };

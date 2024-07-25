@@ -18,6 +18,8 @@ const cloudShader = {
         uniform vec3 fogColor;
         uniform float fogNear;
         uniform float fogFar;
+        uniform float opacity;
+        
         varying vec2 vUv;
 
         void main() {
@@ -27,8 +29,10 @@ const cloudShader = {
         
         gl_FragColor = texture2D( map, vUv );
         gl_FragColor.w *= pow( gl_FragCoord.z, 20.0 );
+        gl_FragColor.w *= opacity;
         gl_FragColor = mix( gl_FragColor, vec4( fogColor , gl_FragColor.w ), fogFactor );
-    
+        
+        
         }
     `
 }
@@ -72,9 +76,10 @@ const cloudMaterials = cloudTextures.map(
     texture => new THREE.ShaderMaterial({
         uniforms: {
             "map": {type: "t", value: texture},
-            "fogColor": {type: "c", value: fog.color},
+            "fogColor": {type: "c", value: fog.value.color},
             "fogNear": {type: "f", value: 8000},
             "fogFar": {type: "f", value: 10000},
+            "opacity": { type: "f", value: 0.5 }
         },
         vertexShader: cloudShader.vertexShader,
         fragmentShader: cloudShader.fragmentShader,
@@ -146,7 +151,7 @@ const animateClouds = function () {
     mergedGeometry.attributes.position.needsUpdate = true; // Mark the attribute for update
 };
 
-export { animateClouds, planesMesh, planesMeshA }
+export { cloudMaterials, animateClouds, planesMesh, planesMeshA }
 
 
 
