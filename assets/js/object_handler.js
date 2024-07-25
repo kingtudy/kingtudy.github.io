@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { getRandomArbitrary } from './function.js';
 
 import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';
@@ -64,4 +65,17 @@ function objectInit(obj, objName, dim, posX=0, posY=0, posZ=0) {
     return obj;
 }
 
-export { objectLoader, objectInit }
+//Aurora top light
+const auroraLight = new THREE.PointLight(0xFF0000, 3000, 8000); // color, intensity, distance
+auroraLight.position.set(18, 1845, -2630);
+
+const auroraLightAnimation = function (t) {
+    if((getRandomArbitrary(0, t) + getRandomArbitrary(0, t)) - getRandomArbitrary(0, t) < 0) {
+        // console.log('changed');
+        auroraLight.intensity = getRandomArbitrary(0, 100000);
+        auroraLight.distance = getRandomArbitrary(5000, 10000);
+    }
+}
+
+
+export { auroraLight, auroraLightAnimation, objectLoader, objectInit }

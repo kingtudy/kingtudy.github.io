@@ -10,7 +10,7 @@ import { Scene } from './betterScene.js'
 import { renderer } from './renderer.js';
 import { sceneManipulator } from './orbit_controls.js';
 import { objectManipulation } from './transform_controls.js';
-import { objectLoader, objectInit } from './object_handler.js';
+import {objectLoader, objectInit, auroraLight, auroraLightAnimation} from './object_handler.js';
 import { effect, paralaxModifiers } from "./parallax.js";
 import "./raycaster.js";
 import { initMeLight, flow, meLoader, mePosition } from "./me.js";
@@ -76,7 +76,7 @@ const parameters = {
     azimuthCenter: 181  // x-coordinate of the center
 };
 
-let xVariator, yVariator, t= 0, t2=0;
+let xVariator, yVariator, t= 0, t2=0, t3=0;
 
 function updateSunPosition(t) {
     xVariator = parameters.azimuth * Math.cos(t) + parameters.azimuthCenter;
@@ -239,6 +239,12 @@ let cameraPositionZ = 2000;
 scene.add(planesMesh);
 scene.add(planesMeshA);
 
+//Aurora light
+scene.add(auroraLight);
+// const auroraLightHelper = new THREE.PointLightHelper(auroraLight, 10);
+// scene.add(auroraLightHelper);
+
+
 function animate() {
     //FPS stabilizer - 60
     // const deltaTime = performance.now();
@@ -288,6 +294,7 @@ function animate() {
     // smokeEngine.update( dt * 0.5 );
     t += 0.003;
     t2 += 0.003;
+    t3 += 0.25;
     updateSunPosition(t);
     updateSun();
     updateMoonPosition(t);
@@ -304,6 +311,7 @@ function animate() {
 
     animateClouds();
     animateStars();
+    auroraLightAnimation(t3);
 }
 
 // camera.position.x += ( paralaxModifiers.x - mouseX - camera.position.x ) * .05;
