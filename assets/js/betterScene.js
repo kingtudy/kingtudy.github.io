@@ -50,8 +50,8 @@ export class Scene {
 
     setupParticleSystems() {
         let scale = 135;
-        let smokeScale = 500;
         let flamePosition = new THREE.Vector3(130, 580, -1582);
+        let smokeScale = 500;
         let smokePosition = new THREE.Vector3(130, 680, -1582);
         this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition));
         // this.manager.addParticleSystem(this.setupSmoke(smokeScale, flamePosition));
@@ -61,14 +61,18 @@ export class Scene {
 
         scale = 80;
         flamePosition = new THREE.Vector3(-150, 50, -1800);
-        this.manager.addParticleSystem(this.setupBaseSmoke(scale, flamePosition));
+        smokeScale = 320;
+        smokePosition = new THREE.Vector3(-150, 60, -1800);
+        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition));
         this.manager.addParticleSystem(this.setupEmbers(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBaseFlame(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBrightFLame(scale, flamePosition));
 
         scale = 50;
         flamePosition = new THREE.Vector3(-460, 1100, -2975);
-        this.manager.addParticleSystem(this.setupBaseSmoke(scale, flamePosition));
+        smokeScale = 120;
+        smokePosition = new THREE.Vector3(-460, 1150, -2975);
+        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition));
         this.manager.addParticleSystem(this.setupEmbers(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBaseFlame(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBrightFLame(scale, flamePosition));
@@ -85,11 +89,11 @@ export class Scene {
         const baseSmokeRenderer = new Photons.AnimatedSpriteRenderer(this.instancedParticleSystems, baseSmokeAtlas, true);
 
         const baseSmokeParticleSystem = new Photons.ParticleSystem(baseSmokeRoot, baseSmokeRenderer, this.renderer);
-        baseSmokeParticleSystem.init(1000);
+        baseSmokeParticleSystem.init(500);
 
-        baseSmokeParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(30));
+        baseSmokeParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(60));
 
-        baseSmokeParticleSystem.addParticleSequence(0, 16);
+        baseSmokeParticleSystem.addParticleSequence(0, 35); //was 16
         const baseSmokeParticleSequences = baseSmokeParticleSystem.getParticleSequences();
 
         baseSmokeParticleSystem.addParticleStateInitializer(new Photons.LifetimeInitializer(10.0, 5.0, 0.0, 0.0, false));
@@ -105,12 +109,12 @@ export class Scene {
             new THREE.Vector3(0.05 * scale, 0.0, 0.05 * scale),
             new THREE.Vector3(-0.025 * scale, 0.0, -0.025 * scale)));
         baseSmokeParticleSystem.addParticleStateInitializer(new Photons.RandomVelocityInitializer(
-            new THREE.Vector3(0.05 * scale, 0.4 * scale, 0.05 * scale),
-            new THREE.Vector3(-0.025 * scale, 0.8 * scale, -0.025 * scale),
-            0.35 * scale, 0.5 * scale, true));
+            new THREE.Vector3(0.05 * scale, 0.5 * scale, 0.4 * scale),
+            new THREE.Vector3(-0.2 * scale, 0.8 * scale, -0.2 * scale),
+            0.35 * scale, 0.5 * scale, false));
         baseSmokeParticleSystem.addParticleStateInitializer(new Photons.SequenceInitializer(baseSmokeParticleSequences));
 
-        baseSmokeParticleSystem.addParticleStateOperator(new Photons.SequenceOperator(baseSmokeParticleSequences, 0.07, false));
+        baseSmokeParticleSystem.addParticleStateOperator(new Photons.SequenceOperator(baseSmokeParticleSequences, 0.03, false));
 
         const baseSmokeOpacityOperator = baseSmokeParticleSystem.addParticleStateOperator(new Photons.OpacityInterpolatorOperator());
         baseSmokeOpacityOperator.addElements([
@@ -137,7 +141,7 @@ export class Scene {
         baseSmokeParticleSystem.addParticleStateOperator(new Photons.AccelerationOperator(
             new Photons.RandomGenerator(THREE.Vector3,
                 new THREE.Vector3(0.0, 0.0, 0.0),
-                new THREE.Vector3(5.0 * scale, 4.5 * scale, 5.0 * scale),
+                new THREE.Vector3(5.0 * scale, 1.5 * scale, 5.0 * scale),
                 0.0, 0.0, false)));
 
         baseSmokeParticleSystem.setSimulateInWorldSpace(true);
@@ -216,7 +220,7 @@ export class Scene {
         const embersParticleSystem = new Photons.ParticleSystem(embersRoot, embersRenderer, this.renderer);
         embersParticleSystem.init(150);
 
-        embersParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(6));
+        embersParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(20));
 
         const sizeInitializerGenerator = new Photons.RandomGenerator(THREE.Vector2,
             new THREE.Vector2(0.0, 0.0),
