@@ -93,27 +93,49 @@ for (let i = 0; i < 80; i++) {
     const clonedPlaneGeo = planeGeo.clone();
     clonedPlaneGeo.applyMatrix4(planeObj.matrix);
 
+    // geometries.push(clonedPlaneGeo);
+    clonedPlaneGeo.userData = {
+        materialIndex: Math.floor(Math.random() * cloudMaterials.length)
+    };
     geometries.push(clonedPlaneGeo);
 }
 
-let planeGeos = BufferGeometryUtils.mergeGeometries(geometries);
-const planesMesh = new THREE.Mesh(planeGeos, cloudMaterials);
+
+let mergedGeometry = BufferGeometryUtils.mergeGeometries(geometries);
+
+const mergedGeometryGroups = mergedGeometry.groups;
+mergedGeometryGroups.length = 0; // Clear existing groups
+
+let offset = 0;
+geometries.forEach((geo, index) => {
+    const count = geo.index.count;
+    mergedGeometry.addGroup(offset, count, geo.userData.materialIndex);
+    offset += count;
+});
+
+const planesMesh = new THREE.Mesh(mergedGeometry, cloudMaterials);
 planesMesh.renderOrder = 0;
 
 const planesMeshA = planesMesh.clone();
 planesMeshA.position.z = -2000;
 planesMeshA.renderOrder = 0;
 
+
+
+
+
+
+
 //To animate cloud movement
 const animateClouds = function () {
-    const positions = planeGeos.attributes.position.array;
+    const positions = mergedGeometry.attributes.position.array;
     for (let i = 0; i < positions.length; i += 3) {
         positions[i] += 2; // Move along X-axis
         if (positions[i] > 8000) { // Reset position to create looping effect
             positions[i] = -8000;
         }
     }
-    planeGeos.attributes.position.needsUpdate = true; // Mark the attribute for update
+    mergedGeometry.attributes.position.needsUpdate = true; // Mark the attribute for update
 };
 
 export { animateClouds, planesMesh, planesMeshA }

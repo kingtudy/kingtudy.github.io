@@ -45,7 +45,7 @@ const meData = [
     "I'm the developer.",
     "How am I doing ? Thanks for asking, I'm just chilling here.",
     "I hope you find interesting what I've managed to build so far.",
-    "If you need help with something, fell free to contact me",
+    "If you need help with something, feel free to contact me",
     "Have a wonderful day !"
 ];
 let forItShallOnlyHappenOnce = false;
