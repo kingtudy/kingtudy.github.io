@@ -41,19 +41,28 @@ let cloudTextures = [
     cloudTextureLoader.load(
         "./assets/img/textures/cloud/cloud1.png",
         ( tex )=>{
-            tex.magFilter = tex.minFilter = THREE.LinearMipMapLinearFilter;
+            tex.wrapS = THREE.ClampToEdgeWrapping;
+            tex.wrapT = THREE.ClampToEdgeWrapping;
+            tex.minFilter = THREE.LinearFilter;
+            tex.magFilter = THREE.LinearFilter;
         }
     ),
     cloudTextureLoader.load(
         "./assets/img/textures/cloud/cloud2.png",
         ( tex )=>{
-            tex.magFilter = tex.minFilter = THREE.LinearMipMapLinearFilter;
+            tex.wrapS = THREE.ClampToEdgeWrapping;
+            tex.wrapT = THREE.ClampToEdgeWrapping;
+            tex.minFilter = THREE.LinearFilter;
+            tex.magFilter = THREE.LinearFilter;
         }
     ),
     cloudTextureLoader.load(
-        "./assets/img/textures/cloud/cloud3.png",
+        "./assets/img/textures/cloud/cloud4.png",
         ( tex )=>{
-            tex.magFilter = tex.minFilter = THREE.LinearMipMapLinearFilter;
+            tex.wrapS = THREE.ClampToEdgeWrapping;
+            tex.wrapT = THREE.ClampToEdgeWrapping;
+            tex.minFilter = THREE.LinearFilter;
+            tex.magFilter = THREE.LinearFilter;
         }
     )
 ];
@@ -82,12 +91,11 @@ const geometries = [];
 
 for (let i = 0; i < 80; i++) {
     planeObj.position.x = getRandomArbitrary(-10000, 10000);
-    planeObj.position.y = -Math.random() * Math.random() * 200 + 3500;
+    planeObj.position.y = -Math.random() * Math.random() * 400 + 3500;
     planeObj.position.z = Math.random() * 4000 - 6000;
 
     // planeObj.rotation.z = Math.random() * Math.PI;
-    planeObj.scale.x = getRandomArbitrary(4, 30);
-    planeObj.scale.y = planeObj.scale.x;
+    planeObj.scale.y = planeObj.scale.x = getRandomArbitrary(10, 50);
     planeObj.updateMatrix();
 
     const clonedPlaneGeo = planeGeo.clone();
@@ -131,8 +139,8 @@ const animateClouds = function () {
     const positions = mergedGeometry.attributes.position.array;
     for (let i = 0; i < positions.length; i += 3) {
         positions[i] += 2; // Move along X-axis
-        if (positions[i] > 8000) { // Reset position to create looping effect
-            positions[i] = -8000;
+        if (positions[i] > 10000) { // Reset position to create looping effect
+            positions[i] = -10000;
         }
     }
     mergedGeometry.attributes.position.needsUpdate = true; // Mark the attribute for update
