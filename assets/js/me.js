@@ -13,13 +13,13 @@ function meLoader() {
         loader.load(
             './assets/img/mefrfr.png',
             function (texture) {
+                texture.colorSpace = THREE.SRGBColorSpace;
                 const geometry = new THREE.PlaneGeometry(80, 100, 10, 10);
                 const material = new THREE.MeshStandardMaterial({
                     map: texture,
-                    side: THREE.DoubleSide,
+                    // side: THREE.DoubleSide,
                     transparent: true,
-                    castShadow: true,
-                    receiveShadow: true
+                    alphaTest: 0.5,
                 });
                 const plane = new THREE.Mesh(geometry, material);
 
