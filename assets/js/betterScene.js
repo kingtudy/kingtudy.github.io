@@ -53,7 +53,7 @@ export class Scene {
         let flamePosition = new THREE.Vector3(130, 580, -1582);
         let smokeScale = 500;
         let smokePosition = new THREE.Vector3(130, 680, -1582);
-        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition,0.5, 0.2, 0.5));
+        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition,0.5, 0.2, 0.5,20));
         // this.manager.addParticleSystem(this.setupSmoke(smokeScale, flamePosition));
         this.manager.addParticleSystem(this.setupEmbers(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBaseFlame(scale, flamePosition));
@@ -63,22 +63,24 @@ export class Scene {
         flamePosition = new THREE.Vector3(-150, 50, -1800);
         smokeScale = 820;
         smokePosition = new THREE.Vector3(500, 100, -2800);
-        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition,0.7, 0.1, 0.05));
+        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition,0.7, 0.1, 0.05,20));
+        this.manager.addParticleSystem(this.setupBaseSmoke(150, flamePosition,0.2, 0.5, 0.5, 3));
         this.manager.addParticleSystem(this.setupEmbers(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBaseFlame(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBrightFLame(scale, flamePosition));
 
         scale = 50;
         flamePosition = new THREE.Vector3(-460, 1100, -2975);
-        smokeScale = 120;
-        smokePosition = new THREE.Vector3(-460, 1150, -2975);
-        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition));
+        smokeScale = 200;
+        smokePosition = new THREE.Vector3(-1100, 280, -2350);
+        this.manager.addParticleSystem(this.setupBaseSmoke(smokeScale, smokePosition,0.01, 0.05, 0.01, 7));
+        this.manager.addParticleSystem(this.setupBaseSmoke(70, flamePosition,0.5, 0.05, 0.5, 10));
         this.manager.addParticleSystem(this.setupEmbers(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBaseFlame(scale, flamePosition));
         this.manager.addParticleSystem(this.setupBrightFLame(scale, flamePosition));
     }
 
-    setupBaseSmoke(scale,position,accX,accY,accZ) {
+    setupBaseSmoke(scale,position,accX,accY,accZ,partNr) {
         const baseSmokeRoot = new THREE.Object3D();
         baseSmokeRoot.position.copy(position);
 
@@ -91,7 +93,7 @@ export class Scene {
         const baseSmokeParticleSystem = new Photons.ParticleSystem(baseSmokeRoot, baseSmokeRenderer, this.renderer);
         baseSmokeParticleSystem.init(70);
 
-        baseSmokeParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(20));
+        baseSmokeParticleSystem.setEmitter(new Photons.ConstantParticleEmitter(partNr));
 
         baseSmokeParticleSystem.addParticleSequence(0, 35); //was 16
         const baseSmokeParticleSequences = baseSmokeParticleSystem.getParticleSequences();
