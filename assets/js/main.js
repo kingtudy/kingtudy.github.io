@@ -16,7 +16,7 @@ import "./raycaster.js";
 import { initMeLight, flow, meLoader, mePosition } from "./me.js";
 
 //The Creation
-import { sky, sun, moon, updateMoonPosition, stars, planet, updatePlanetPosition } from './sky.js';
+import { sky, sun, moon, updateMoonPosition, animateStars, stars, planet, updatePlanetPosition } from './sky.js';
 import { water } from './ocean.js';
 import { cloudMaterials, animateClouds, planesMesh, planesMeshA } from './cumulonimbus.js';
 // import { smokeEngine } from './smoke.js';
@@ -303,6 +303,7 @@ function animate() {
     }
 
     animateClouds();
+    animateStars();
 }
 
 // camera.position.x += ( paralaxModifiers.x - mouseX - camera.position.x ) * .05;
