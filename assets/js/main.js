@@ -321,6 +321,7 @@ function animate() {
 //Goto the place where everything happens
 $(window).on("load", function() {
     animate();
+    $('#preloader').hide();
 });
 
 
