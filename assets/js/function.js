@@ -14,7 +14,8 @@ function animationStart() {
     if(isMobile()) {
         lowerAnimation();
     } else {
-        animate();
+        lowerAnimation();
+        // animate();
     }
 }
 

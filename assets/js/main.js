@@ -255,7 +255,7 @@ function lowerAnimation() {
     }
     requestAnimationFrame(lowerAnimation);
 
-    water.material.uniforms['time'].value += 1.0 / 60.0;
+    // water.material.uniforms['time'].value += 1.0 / 60.0;
 
     if(cameraPositionY > 50) {
         cameraPositionY = cameraPositionY - 6;
@@ -268,30 +268,30 @@ function lowerAnimation() {
     }
 
     renderer.render(scene, camera); //This shit takes a long time
-    particleScene.render();
-    sceneManipulator.update();
+    // particleScene.render();
+    // sceneManipulator.update();
 
-    t += 0.003;
-    t2 += 0.003;
-    t3 += 0.25;
-    updateSunPosition(t);
-    updateSun();
-    updateMoonPosition(t);
-    updatePlanetPosition(t2);
+    // t += 0.003;
+    // t2 += 0.003;
+    // t3 += 0.25;
+    // updateSunPosition(t);
+    // updateSun();
+    // updateMoonPosition(t);
+    // updatePlanetPosition(t2);
 
-    moon.rotation.y += rotationSpeed;
-    planet.rotation.y += rotationSpeed2;
+    // moon.rotation.y += rotationSpeed;
+    // planet.rotation.y += rotationSpeed2;
 
     //Animate lantern text
-    if ( flow ) {
-        flow.moveAlongCurve( 0.004 );
-    }
+    // if ( flow ) {
+    //     flow.moveAlongCurve( 0.004 );
+    // }
 
     // animateClouds();
     // animateStars();
     // auroraLightAnimation(t3);
 
-    particleScene.update();
+    // particleScene.update();
 }
 
 function animate() {
