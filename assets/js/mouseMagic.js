@@ -125,6 +125,6 @@ const positionCursor = delta => {
     });
 };
 
-if(!detectMobile()) {
+if(!isMobile()) {
     init();
 }

@@ -2,7 +2,7 @@ function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-function detectMobile() {
+function isMobile() {
     if(window.matchMedia("(max-width: 767px)").matches) {
         return true;
     }
@@ -11,7 +11,11 @@ function detectMobile() {
 
 function animationStart() {
     $('#preloader').hide();
-    animate();
+    if(isMobile) {
+        lowerAnimation();
+    } else {
+        animate();
+    }
 }
 
 function smoothScroll() {
@@ -22,5 +26,5 @@ function smoothScroll() {
 //Attach everything to the window context
 window.animationStart = animationStart;
 window.smoothScroll = smoothScroll;
-window.detectMobile = detectMobile;
+window.isMobile = isMobile;
 window.getRandomArbitrary = getRandomArbitrary;

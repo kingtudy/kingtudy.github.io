@@ -17,7 +17,7 @@ function onObjMouseClick(event) {
 
     const intersects = raycaster.intersectObjects(scene.children, true);
 
-    if (intersects.length > 0) {
+    if (intersects.length > 0 && !isMobile()) {
         intersects.forEach(intersect => {
             if(intersect.object.name === 'me') {
                 paralaxModifiers.y = 700;

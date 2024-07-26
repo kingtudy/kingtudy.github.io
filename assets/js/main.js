@@ -53,8 +53,8 @@ window.addEventListener( 'resize', onWindowResize );
 
 // scene.add(directionalLight);
 // scene.add(ambientLight);
-scene.add( objectManipulation );
-objectManipulation.addEventListener( 'change', animate );
+// scene.add( objectManipulation );
+// objectManipulation.addEventListener( 'change', animate );
 
 scene.add( water );
 scene.add( sky );
@@ -244,16 +244,65 @@ scene.add(auroraLight);
 // scene.add(auroraLightHelper);
 
 
+function lowerAnimation() {
+    //FPS stabilizer - 60
+    const deltaTime = performance.now();
+
+    //If not enough time has passed since the last render, skip this frame
+    if (deltaTime < 1000 / 60) {
+        requestAnimationFrame(lowerAnimation);
+        return;
+    }
+    requestAnimationFrame(lowerAnimation);
+
+    water.material.uniforms['time'].value += 1.0 / 60.0;
+
+    if(cameraPositionY > 50) {
+        cameraPositionY = cameraPositionY - 6;
+        camera.position.y = cameraPositionY;
+    }
+
+    if(cameraPositionZ > 100) {
+        cameraPositionZ = cameraPositionZ - 11;
+        camera.position.z = cameraPositionZ;
+    }
+
+    renderer.render(scene, camera); //This shit takes a long time
+    particleScene.render();
+    sceneManipulator.update();
+
+    t += 0.003;
+    t2 += 0.003;
+    t3 += 0.25;
+    updateSunPosition(t);
+    updateSun();
+    updateMoonPosition(t);
+    updatePlanetPosition(t2);
+
+    moon.rotation.y += rotationSpeed;
+    planet.rotation.y += rotationSpeed2;
+
+    //Animate lantern text
+    if ( flow ) {
+        flow.moveAlongCurve( 0.004 );
+    }
+
+    // animateClouds();
+    // animateStars();
+    // auroraLightAnimation(t3);
+
+    particleScene.update();
+}
+
 function animate() {
     //FPS stabilizer - 60
-    // const deltaTime = performance.now();
-    //
-    // //If not enough time has passed since the last render, skip this frame
-    // if (deltaTime < 1000 / 60) {
-    //     requestAnimationFrame(animate);
-    //     return;
-    // }
+    const deltaTime = performance.now();
 
+    //If not enough time has passed since the last render, skip this frame
+    if (deltaTime < 1000 / 60) {
+        requestAnimationFrame(animate);
+        return;
+    }
     requestAnimationFrame(animate);
 
     // const elapsedTime = performance.now() / 1000;
@@ -319,6 +368,7 @@ function animate() {
 }
 
 window.animate = animate;
+window.lowerAnimation = lowerAnimation;
 
 $(window).on("load", function() {
     $('.preloader-img').hide();
