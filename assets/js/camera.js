@@ -2,8 +2,16 @@ import * as THREE from "three";
 
 const aspect = window.innerWidth / window.innerHeight;
 
+let fov;
+if(isMobile()) {
+    fov = 120;
+} else {
+    fov = 60;
+}
+
+
 const camera = new THREE.PerspectiveCamera(
-    60,
+    fov,
     aspect,
     0.1,
     10000
