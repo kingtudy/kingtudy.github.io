@@ -234,7 +234,6 @@ document.addEventListener( 'mousemove', onDocumentMouseMove );
 let cameraPositionY = 1000;
 let cameraPositionZ = 2000;
 
-
 //Clouds
 scene.add(planesMesh);
 scene.add(planesMeshA);
@@ -267,9 +266,9 @@ function animate() {
     // water.rotation.x += 0.00;
     // water.rotation.y += 0.00;
     // water.rotation.z += 0.01;
+    // console.log('wtf u doing ?');
 
-    particleScene.update();
-    renderer.render(scene, camera);
+
 
     // effect.render( scene, camera );
 
@@ -286,6 +285,7 @@ function animate() {
         camera.position.z = cameraPositionZ;
     }
 
+    renderer.render(scene, camera); //This shit takes a long time
     particleScene.render();
 
     sceneManipulator.update();
@@ -312,6 +312,8 @@ function animate() {
     animateClouds();
     animateStars();
     auroraLightAnimation(t3);
+
+    particleScene.update();
 }
 
 // camera.position.x += ( paralaxModifiers.x - mouseX - camera.position.x ) * .05;
@@ -325,11 +327,11 @@ $(window).on("load", function() {
 });
 
 function animationStart() {
-    animate();
     $('#preloader').hide();
+    animate();
 }
 
 window.animationStart = animationStart;
 
 //Check THREE.js version
-// console.log(THREE.REVISION);
+console.log("THREE.js ver. " + THREE.REVISION);
