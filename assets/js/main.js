@@ -320,10 +320,16 @@ function animate() {
 
 //Goto the place where everything happens
 $(window).on("load", function() {
-    animate();
-    $('#preloader').hide();
+    $('.preloader-img').hide();
+    $('#startItAll').show();
 });
 
+function animationStart() {
+    animate();
+    $('#preloader').hide();
+}
+
+window.animationStart = animationStart;
 
 //Check THREE.js version
 // console.log(THREE.REVISION);
