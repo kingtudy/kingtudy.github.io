@@ -331,7 +331,13 @@ function animationStart() {
     animate();
 }
 
+function smoothScroll() {
+    $(".modal-dialog-scrollable .modal-body").animate({ scrollTop: 0 }, "slow");
+    return false;
+}
+
 window.animationStart = animationStart;
+window.smoothScroll = smoothScroll;
 
 //Check THREE.js version
 console.log("THREE.js ver. " + THREE.REVISION);
