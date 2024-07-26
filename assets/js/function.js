@@ -11,7 +11,7 @@ function isMobile() {
 
 function animationStart() {
     $('#preloader').hide();
-    if(isMobile) {
+    if(isMobile()) {
         lowerAnimation();
     } else {
         animate();
