@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { getRandomArbitrary } from './function.js';
 
 import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { MTLLoader } from 'three/addons/loaders/MTLLoader.js';

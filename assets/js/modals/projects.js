@@ -27,7 +27,7 @@ const ltt = '<h3 class="subnautica-font mt-2 text-center m-0">LTT Desk Configura
 
     '<div class="d-flex justify-content-start align-items-center inter-section-custom-margin">' +
     '<h3 style="margin: 0 1em 0 0;" class="subnautica-font d-inline">Access project:</h3>' +
-    '<a id="outerLink" target="_blank" class="subnautica-rounded-btn" href="'+ link +'" >' +
+    '<a target="_blank" class="outer-link subnautica-rounded-btn" href="'+ link +'" >' +
     '<img src="./assets/img/icons/eye.gif" alt="eye" class="img-responsive" />' +
     '</a>' +
     '</div>' +
@@ -41,7 +41,7 @@ const ltt = '<h3 class="subnautica-font mt-2 text-center m-0">LTT Desk Configura
     '<div id="slickPrevCustom" class="slick-prev">' +
     '<img class="slick-prev-img" src="./assets/img/icons/prev-alt.gif" alt="prev-ico" />' +
     '</div>' +
-    '<div class="display-slider-container-inner" id="displaySliderContainer">' +
+    '<div class="display-slider-container-inner" id="displaySliderContainer0">' +
     sliderData +
     '</div>' +
     '<div id="slickNextCustom" class="slick-next">' +
@@ -78,7 +78,7 @@ const msv = '<h3 class="subnautica-font mt-2 text-center m-0">MSV.GLOBAL</h3>' +
 
     '<div class="d-flex justify-content-start align-items-center inter-section-custom-margin">' +
     '<h3 style="margin: 0 1em 0 0;" class="subnautica-font d-inline">Access project:</h3>' +
-    '<a id="outerLink" target="_blank" class="subnautica-rounded-btn" href="'+ link +'" >' +
+    '<a target="_blank" class="outer-link subnautica-rounded-btn" href="'+ link +'" >' +
     '<img src="./assets/img/icons/eye.gif" alt="eye" class="img-responsive" />' +
     '</a>' +
     '</div>' +
@@ -92,7 +92,7 @@ const msv = '<h3 class="subnautica-font mt-2 text-center m-0">MSV.GLOBAL</h3>' +
     '<div id="slickPrevCustom" class="slick-prev">' +
     '<img class="slick-prev-img" src="./assets/img/icons/prev-alt.gif" alt="prev-ico" />' +
     '</div>' +
-    '<div class="display-slider-container-inner" id="displaySliderContainer">' +
+    '<div class="display-slider-container-inner" id="displaySliderContainer1">' +
     sliderData +
     '</div>' +
     '<div id="slickNextCustom" class="slick-next">' +
@@ -129,7 +129,7 @@ const asgra = '<h3 class="subnautica-font mt-2 text-center m-0">ASGRA</h3>' +
 
     '<div class="d-flex justify-content-start align-items-center inter-section-custom-margin">' +
     '<h3 style="margin: 0 1em 0 0;" class="subnautica-font d-inline">Access project:</h3>' +
-    '<a id="outerLink" target="_blank" class="subnautica-rounded-btn" href="'+ link +'" >' +
+    '<a target="_blank" class="outer-link subnautica-rounded-btn" href="'+ link +'" >' +
     '<img src="./assets/img/icons/eye.gif" alt="eye" class="img-responsive" />' +
     '</a>' +
     '</div>' +
@@ -143,7 +143,7 @@ const asgra = '<h3 class="subnautica-font mt-2 text-center m-0">ASGRA</h3>' +
     '<div id="slickPrevCustom" class="slick-prev">' +
     '<img class="slick-prev-img" src="./assets/img/icons/prev-alt.gif" alt="prev-ico" />' +
     '</div>' +
-    '<div class="display-slider-container-inner" id="displaySliderContainer">' +
+    '<div class="display-slider-container-inner" id="displaySliderContainer2">' +
     sliderData +
     '</div>' +
     '<div id="slickNextCustom" class="slick-next">' +
@@ -153,7 +153,7 @@ const asgra = '<h3 class="subnautica-font mt-2 text-center m-0">ASGRA</h3>' +
 
 //Cafeteria ------------------------------------------------
 sliderData = '';
-link = 'https://sophirion.net/super_ultra_mega_secret_project/index.html';
+link = 'https://sophirion.net/cafeteria';
 description =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id rutrum enim. Mauris eu urna ut ex euismod posuere. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent vehicula eleifend nisi sed facilisis. Nullam laoreet urna vel turpis dictum, sagittis facilisis eros feugiat. Donec eget augue felis. Aliquam eget elementum nulla.' +
     '<br><br>' +
@@ -161,26 +161,26 @@ description =
     '<br><br>' +
     'Etiam arcu est, volutpat sit amet lorem vitae, viverra volutpat enim. Ut non dignissim erat. Vestibulum egestas mauris ultricies pellentesque ornare. Sed non nisi lacus. Nullam vehicula maximus ultricies. Pellentesque dignissim commodo quam, eu euismod nunc ornare vel. Praesent non sapien cursus, varius felis vitae, faucibus nibh. Duis elementum neque in rutrum eleifend.';
 
-for(let i=0; i < 11; i++) {
+for(let i=0; i < 3; i++) {
     sliderData +=
         '<div class="slider-img-container">' +
-        '<img src="./assets/projects_data/ltt/res' + i + '.gif" class="img-responsive" alt="slider-img-2" />' +
+        '<img src="./assets/projects_data/cafeteria/res' + i + '.gif" class="img-responsive" alt="slider-img-2" />' +
         '</div>';
 }
 
-const cafeteria = '<h3 class="subnautica-font mt-2 text-center m-0">LTT Desk Configurator</h3>' +
+const cafeteria = '<h3 class="subnautica-font mt-2 text-center m-0">Cafeteria</h3>' +
     '<img src="./assets/img/cool_lines.svg" class="cool-separator" alt="separator-img" />' +
 
-    '<a href="./assets/projects_data/ltt/front.png" data-lightbox="mygallery" class="showcase-img-container">' +
+    '<a href="./assets/projects_data/cafeteria/front.png" data-lightbox="mygallery" class="showcase-img-container">' +
     '<div class="show-size-image">' +
     '<img src="./assets/img/icons/resize.gif" alt="resize" />' +
     '</div>' +
-    '<img src="./assets/projects_data/ltt/front.png" class="img-responsive" alt="showcase-img" >' +
+    '<img src="./assets/projects_data/cafeteria/front.png" class="img-responsive" alt="showcase-img" >' +
     '</a>' +
 
     '<div class="d-flex justify-content-start align-items-center inter-section-custom-margin">' +
     '<h3 style="margin: 0 1em 0 0;" class="subnautica-font d-inline">Access project:</h3>' +
-    '<a id="outerLink" target="_blank" class="subnautica-rounded-btn" href="'+ link +'" >' +
+    '<a target="_blank" class="outer-link subnautica-rounded-btn" href="'+ link +'" >' +
     '<img src="./assets/img/icons/eye.gif" alt="eye" class="img-responsive" />' +
     '</a>' +
     '</div>' +
@@ -194,7 +194,7 @@ const cafeteria = '<h3 class="subnautica-font mt-2 text-center m-0">LTT Desk Con
     '<div id="slickPrevCustom" class="slick-prev">' +
     '<img class="slick-prev-img" src="./assets/img/icons/prev-alt.gif" alt="prev-ico" />' +
     '</div>' +
-    '<div class="display-slider-container-inner" id="displaySliderContainer">' +
+    '<div class="display-slider-container-inner" id="displaySliderContainer3">' +
     sliderData +
     '</div>' +
     '<div id="slickNextCustom" class="slick-next">' +
@@ -204,7 +204,7 @@ const cafeteria = '<h3 class="subnautica-font mt-2 text-center m-0">LTT Desk Con
 
 //Subnautica Interface ------------------------------------------------
 sliderData = '';
-link = 'https://sophirion.net/super_ultra_mega_secret_project/index.html';
+link = 'https://sophirion.net/portfolio';
 description =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id rutrum enim. Mauris eu urna ut ex euismod posuere. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent vehicula eleifend nisi sed facilisis. Nullam laoreet urna vel turpis dictum, sagittis facilisis eros feugiat. Donec eget augue felis. Aliquam eget elementum nulla.' +
     '<br><br>' +
@@ -212,10 +212,10 @@ description =
     '<br><br>' +
     'Etiam arcu est, volutpat sit amet lorem vitae, viverra volutpat enim. Ut non dignissim erat. Vestibulum egestas mauris ultricies pellentesque ornare. Sed non nisi lacus. Nullam vehicula maximus ultricies. Pellentesque dignissim commodo quam, eu euismod nunc ornare vel. Praesent non sapien cursus, varius felis vitae, faucibus nibh. Duis elementum neque in rutrum eleifend.';
 
-for(let i=0; i < 11; i++) {
+for(let i=0; i < 0; i++) {
     sliderData +=
         '<div class="slider-img-container">' +
-        '<img src="./assets/projects_data/ltt/res' + i + '.gif" class="img-responsive" alt="slider-img-2" />' +
+        '<img src="./assets/projects_data/subnautica/res' + i + '.gif" class="img-responsive" alt="slider-img-2" />' +
         '</div>';
 }
 
@@ -231,7 +231,7 @@ const subnautica = '<h3 class="subnautica-font mt-2 text-center m-0">LTT Desk Co
 
     '<div class="d-flex justify-content-start align-items-center inter-section-custom-margin">' +
     '<h3 style="margin: 0 1em 0 0;" class="subnautica-font d-inline">Access project:</h3>' +
-    '<a id="outerLink" target="_blank" class="subnautica-rounded-btn" href="'+ link +'" >' +
+    '<a target="_blank" class="outer-link subnautica-rounded-btn" href="'+ link +'" >' +
     '<img src="./assets/img/icons/eye.gif" alt="eye" class="img-responsive" />' +
     '</a>' +
     '</div>' +
@@ -245,7 +245,7 @@ const subnautica = '<h3 class="subnautica-font mt-2 text-center m-0">LTT Desk Co
     '<div id="slickPrevCustom" class="slick-prev">' +
     '<img class="slick-prev-img" src="./assets/img/icons/prev-alt.gif" alt="prev-ico" />' +
     '</div>' +
-    '<div class="display-slider-container-inner" id="displaySliderContainer">' +
+    '<div class="display-slider-container-inner" id="displaySliderContainer4">' +
     sliderData +
     '</div>' +
     '<div id="slickNextCustom" class="slick-next">' +

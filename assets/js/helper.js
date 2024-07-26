@@ -39,19 +39,21 @@ $(document).ready(function() {
         });
 
         setTimeout(function() {
-            $('#displaySliderContainer').slick({
-                infinite: true,
-                autoplay: false,
-                autoplaySpeed: 5000,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                dots: true,
-                adaptiveHeight: false,
-                centerMode: false,
-                fade: false,
-                cssEase: 'linear',
-                nextArrow: $('#slickNextCustom'),
-                prevArrow: $('#slickPrevCustom')
+            contents.each(function(index) {
+                $('#displaySliderContainer' + index).slick({
+                    infinite: true,
+                    autoplay: false,
+                    autoplaySpeed: 5000,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    adaptiveHeight: false,
+                    centerMode: false,
+                    fade: false,
+                    cssEase: 'linear',
+                    nextArrow: $('#content-id-' + index + ' #slickNextCustom'),
+                    prevArrow: $('#content-id-' + index + ' #slickPrevCustom')
+                });
             });
         }, 500);
 
@@ -73,7 +75,7 @@ $(document).ready(function() {
         modalBody.html(workContent);
     });
 
-    function setClickListeners(tabs, contents) {
+    function setClickListeners(tabs) {
         const modalTarget = $('#displayModal');
         modalTarget.off();
         modalTarget.children().off();
@@ -103,15 +105,14 @@ $(document).ready(function() {
             playSound('menu-select');
         });
 
-        $('#outerLink').on('mouseenter', function () {
+        $('.outer-link').on('mouseenter', function () {
             playSound('menu-tick');
         });
 
-        $('#outerLink').on('click', function () {
+        $('.outer-link').on('click', function () {
             playSound('menu-link');
         });
     }
-
 
     //Sounds Shit
 

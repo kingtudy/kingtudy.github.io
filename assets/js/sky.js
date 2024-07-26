@@ -1,5 +1,4 @@
 import { Sky } from 'three/addons/objects/Sky.js';
-import { getRandomArbitrary } from './function.js';
 import '../core/simplex-noise/simplex-noise.min.js';
 
 

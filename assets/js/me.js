@@ -174,7 +174,7 @@ function displayText() {
 
 function initMeLight() {
     if (!scene.getObjectByName('meLamp')) {
-        meLight = new THREE.PointLight(0xffffff, 1000, 1500); // color, intensity, distance
+        meLight = new THREE.PointLight(0xffffff, 3000, 2500); // color, intensity, distance
         meLight.name = 'meLamp';
         meLight.position.set(685, 730, -1365);
         scene.add(meLight);

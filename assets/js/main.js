@@ -1,7 +1,6 @@
 //Core
 import * as THREE from 'three';
 import './mouseMagic.js';
-
 //Project
 import { camera } from './camera.js';
 import { ambientLight, directionalLight } from './lighting.js';
@@ -62,7 +61,8 @@ scene.add( sky );
 // const lightHelper = new THREE.CameraHelper( directionalLight.shadow.camera );
 // scene.add( lightHelper );
 const axesHelper = new THREE.AxesHelper( 5 );
-scene.add( axesHelper );
+axesHelper.position.set(0,5,0);
+// scene.add( axesHelper );
 
 const pmremGenerator = new THREE.PMREMGenerator( renderer );
 const sceneEnv = new THREE.Scene();
@@ -314,30 +314,22 @@ function animate() {
     auroraLightAnimation(t3);
 
     particleScene.update();
+
+    //to put something while the data gets transfer to the GPU
 }
+
+window.animate = animate;
+
+$(window).on("load", function() {
+    $('.preloader-img').hide();
+    $('#startItAll').show();
+});
 
 // camera.position.x += ( paralaxModifiers.x - mouseX - camera.position.x ) * .05;
 // camera.position.y += ( paralaxModifiers.y - mouseY - camera.position.y ) * .05;
 // camera.updateProjectionMatrix();
 
 //Goto the place where everything happens
-$(window).on("load", function() {
-    $('.preloader-img').hide();
-    $('#startItAll').show();
-});
-
-function animationStart() {
-    $('#preloader').hide();
-    animate();
-}
-
-function smoothScroll() {
-    $(".modal-dialog-scrollable .modal-body").animate({ scrollTop: 0 }, "slow");
-    return false;
-}
-
-window.animationStart = animationStart;
-window.smoothScroll = smoothScroll;
 
 //Check THREE.js version
 console.log("THREE.js ver. " + THREE.REVISION);

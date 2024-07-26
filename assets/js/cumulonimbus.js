@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 
 import { fog } from './scene.js';
-import { getRandomArbitrary } from './function.js'
 
 //Le custom cloud shader
 const cloudShader = {
