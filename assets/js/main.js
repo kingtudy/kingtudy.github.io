@@ -205,8 +205,8 @@ initMeLight();
 //     console.log(aurora.rotation);
 // });
 
-particleScene = new Scene(scene, camera, renderer);
-particleScene.build();
+// particleScene = new Scene(scene, camera, renderer);
+// particleScene.build();
 
 
 const tiltAngle = Math.PI / 6; // Tilt by 30 degrees
@@ -268,7 +268,7 @@ function lowerAnimation() {
     }
 
     renderer.render(scene, camera); //This shit takes a long time
-    particleScene.render();
+    // particleScene.render();
     sceneManipulator.update();
 
     t += 0.003;
@@ -291,7 +291,7 @@ function lowerAnimation() {
     // animateStars();
     // auroraLightAnimation(t3);
 
-    particleScene.update();
+    // particleScene.update();
 }
 
 function animate() {
@@ -335,8 +335,7 @@ function animate() {
     }
 
     renderer.render(scene, camera); //This shit takes a long time
-    particleScene.render();
-
+    // particleScene.render();
     sceneManipulator.update();
 
     // var dt = clock.getDelta();
@@ -362,7 +361,7 @@ function animate() {
     animateStars();
     auroraLightAnimation(t3);
 
-    particleScene.update();
+    // particleScene.update();
 
     //to put something while the data gets transfer to the GPU
 }
