@@ -27,35 +27,50 @@ $(document).ready(function() {
         let tabs = $('.display-tabs-container div').children('.display-tab');
         let contents = $('.display-content-container').children('.display-content');
 
-        tabs.each(function(index) {
+        tabs.each(function (index) {
             $(this).attr('id', 'tab-id-' + index);
         });
 
-        contents.each(function(index) {
+        contents.each(function (index) {
             $(this).attr('id', 'content-id-' + index);
-            if(index > 0) {
+            if (index > 0) {
                 $(this).hide();
             }
         });
 
-        setTimeout(function() {
-            $(this).addClass('iniSlick');
-            $('#displaySliderContainer0').slick({
-                infinite: true,
-                autoplay: false,
-                autoplaySpeed: 5000,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                dots: true,
-                adaptiveHeight: false,
-                centerMode: false,
-                fade: false,
-                cssEase: 'linear',
-                nextArrow: $('#content-id-0 #slickNextCustom'),
-                prevArrow: $('#content-id-0 #slickPrevCustom')
-            });
-        }, 500);
+        if(!$(this).hasClass('iniSlick')) {
+            setTimeout(function () {
+                $(this).addClass('iniSlick');
+                $('#displaySliderContainer0').slick({
+                    infinite: true,
+                    autoplay: false,
+                    autoplaySpeed: 5000,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    dots: true,
+                    adaptiveHeight: false,
+                    centerMode: false,
+                    fade: false,
+                    cssEase: 'linear',
+                    nextArrow: $('#content-id-0 #slickNextCustom'),
+                    prevArrow: $('#content-id-0 #slickPrevCustom')
+                });
+            }, 500);
 
+            $('#content-id-0 #slickPrevCustom').on('click', function () {
+                playSound('menu-select');
+            });
+            $('#content-id-0 #slickNextCustom').on('click', function () {
+                playSound('menu-select');
+            });
+
+            $('#content-id-0 #slickPrevCustom').on('mouseenter', function () {
+                playSound('menu-tick');
+            });
+            $('#content-id-0 #slickNextCustom').on('mouseenter', function () {
+                playSound('menu-tick');
+            });
+        }
         // $('#displaySliderContainer').slick('setPosition');
         // $('.display-slider-container').addClass('open');
 
@@ -136,6 +151,20 @@ $(document).ready(function() {
                             prevArrow: $('#content-id-' + index + ' #slickPrevCustom')
                         });
                     }, 500);
+
+                    $('#content-id-' + index + ' #slickPrevCustom').on('click', function () {
+                        playSound('menu-select');
+                    });
+                    $('#content-id-' + index + ' #slickNextCustom').on('click', function () {
+                        playSound('menu-select');
+                    });
+
+                    $('#content-id-' + index + ' #slickPrevCustom').on('mouseenter', function () {
+                        playSound('menu-tick');
+                    });
+                    $('#content-id-' + index + ' #slickNextCustom').on('mouseenter', function () {
+                        playSound('menu-tick');
+                    });
                 }
             });
         });
