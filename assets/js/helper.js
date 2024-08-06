@@ -39,28 +39,27 @@ $(document).ready(function() {
         });
 
         setTimeout(function() {
-            contents.each(function(index) {
-                $('#displaySliderContainer' + index).slick({
-                    infinite: true,
-                    autoplay: false,
-                    autoplaySpeed: 5000,
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    dots: true,
-                    adaptiveHeight: false,
-                    centerMode: false,
-                    fade: false,
-                    cssEase: 'linear',
-                    nextArrow: $('#content-id-' + index + ' #slickNextCustom'),
-                    prevArrow: $('#content-id-' + index + ' #slickPrevCustom')
-                });
+            $(this).addClass('iniSlick');
+            $('#displaySliderContainer0').slick({
+                infinite: true,
+                autoplay: false,
+                autoplaySpeed: 5000,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                dots: true,
+                adaptiveHeight: false,
+                centerMode: false,
+                fade: false,
+                cssEase: 'linear',
+                nextArrow: $('#content-id-0 #slickNextCustom'),
+                prevArrow: $('#content-id-0 #slickPrevCustom')
             });
         }, 500);
 
         // $('#displaySliderContainer').slick('setPosition');
         // $('.display-slider-container').addClass('open');
 
-        setClickListeners(tabs, contents);
+        setClickListeners(tabs);
     });
 
     aboutBtn.on('click', function() {
@@ -86,6 +85,26 @@ $(document).ready(function() {
                 $('#content-id-' + index).show();
                 $('.display-tab').removeClass('active');
                 $(this).addClass('active');
+
+                if(!$(this).hasClass('iniSlick')) {
+                    $(this).addClass('iniSlick');
+                    setTimeout(function() {
+                        $('#displaySliderContainer' + index).slick({
+                            infinite: true,
+                            autoplay: false,
+                            autoplaySpeed: 5000,
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            dots: true,
+                            adaptiveHeight: false,
+                            centerMode: false,
+                            fade: false,
+                            cssEase: 'linear',
+                            nextArrow: $('#content-id-' + index + ' #slickNextCustom'),
+                            prevArrow: $('#content-id-' + index + ' #slickPrevCustom')
+                        });
+                    }, 500);
+                }
             });
         });
 

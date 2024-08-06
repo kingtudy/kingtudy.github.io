@@ -28,6 +28,13 @@ const pointer = new THREE.Vector2();
 const particleCount = 500;
 let clock = new THREE.Clock();
 
+//Debugging
+const stats = new Stats();
+function toggleStatsVisibility() {
+    stats.dom.style.display = (stats.dom.style.display === 'none') ? 'block' : 'none';
+}
+$("#Container").append(stats.dom);
+
 function onWindowResize() {
     //Set aspect ratio
     const aspect = window.innerWidth / window.innerHeight;
@@ -243,13 +250,12 @@ scene.add(auroraLight);
 // const auroraLightHelper = new THREE.PointLightHelper(auroraLight, 10);
 // scene.add(auroraLightHelper);
 
-
 function lowerAnimation() {
     //FPS stabilizer - 60
     const deltaTime = performance.now();
 
     //If not enough time has passed since the last render, skip this frame
-    if (deltaTime < 1000 / 60) {
+    if (deltaTime < 1000 / 120) {
         requestAnimationFrame(lowerAnimation);
         return;
     }
@@ -268,7 +274,6 @@ function lowerAnimation() {
     }
 
     renderer.render(scene, camera); //This shit takes a long time
-    particleScene.render();
     sceneManipulator.update();
 
     t += 0.003;
@@ -291,15 +296,18 @@ function lowerAnimation() {
     // animateStars();
     // auroraLightAnimation(t3);
 
+    particleScene.render();
     particleScene.update();
 }
 
 function animate() {
+    stats.update();
+
     //FPS stabilizer - 60
     const deltaTime = performance.now();
 
     //If not enough time has passed since the last render, skip this frame
-    if (deltaTime < 1000 / 60) {
+    if (deltaTime < 1000 / 120) {
         requestAnimationFrame(animate);
         return;
     }
@@ -335,7 +343,6 @@ function animate() {
     }
 
     renderer.render(scene, camera); //This shit takes a long time
-    particleScene.render();
     sceneManipulator.update();
 
     // var dt = clock.getDelta();
@@ -361,6 +368,7 @@ function animate() {
     animateStars();
     auroraLightAnimation(t3);
 
+    particleScene.render();
     particleScene.update();
 
     //to put something while the data gets transfer to the GPU
