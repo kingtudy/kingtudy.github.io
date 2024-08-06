@@ -6,6 +6,7 @@ import {paralaxModifiers} from './parallax.js';
 import {camera} from './camera.js';
 import {scene} from './scene.js';
 import {sceneManipulator} from "./orbit_controls.js";
+import { playSound } from "./audio_handler.js";
 
 function meLoader() {
     return new Promise((resolve, reject) => {
@@ -161,8 +162,8 @@ function displayText() {
     meText.html(meData[index]);
     // console.log(meData.length - 1);
     if (index === meData.length - 1) {
-        mePrev.hide();
-        meNext.css('display', 'flex');
+        mePrev.css('display', 'flex');
+        meNext.hide();
     } else if (index === 0) {
         mePrev.hide();
         meNext.css('display', 'flex');
@@ -205,6 +206,30 @@ function initText() {
         });
         mePrev.on('click', () => {
             prevText();
+        });
+
+        meNext.on('mouseenter', function () {
+            playSound('menu-tick');
+        });
+
+        meNext.on('click', function () {
+            playSound('menu-select');
+        });
+
+        mePrev.on('mouseenter', function () {
+            playSound('menu-tick');
+        });
+
+        mePrev.on('click', function () {
+            playSound('menu-select');
+        });
+
+        $('#goBackToWhereIWas').on('mouseenter', function () {
+            playSound('menu-tick');
+        });
+
+        $('#goBackToWhereIWas').on('click', function () {
+            playSound('menu-close');
         });
 
         window.jumpToPage = jumpToPage;

@@ -4,6 +4,7 @@ import { scene } from "./scene.js";
 import { sceneManipulator } from "./orbit_controls.js";
 import { paralaxModifiers } from "./parallax.js";
 import { initText } from "./me.js";
+import { playSound } from "./audio_handler.js";
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -32,6 +33,8 @@ function onObjMouseClick(event) {
                 $("#meTextbox").show();
 
                 initText();
+
+                playSound('menu-link');
 
                 window.removeEventListener('click', onObjMouseClick, false);
             }

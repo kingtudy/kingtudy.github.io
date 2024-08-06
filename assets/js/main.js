@@ -29,11 +29,11 @@ const particleCount = 500;
 let clock = new THREE.Clock();
 
 //Debugging
-const stats = new Stats();
-function toggleStatsVisibility() {
-    stats.dom.style.display = (stats.dom.style.display === 'none') ? 'block' : 'none';
-}
-$("#Container").append(stats.dom);
+// const stats = new Stats();
+// function toggleStatsVisibility() {
+//     stats.dom.style.display = (stats.dom.style.display === 'none') ? 'block' : 'none';
+// }
+// $("#Container").append(stats.dom);
 
 function onWindowResize() {
     //Set aspect ratio
@@ -301,7 +301,7 @@ function lowerAnimation() {
 }
 
 function animate() {
-    stats.update();
+    // stats.update();
 
     //FPS stabilizer - 60
     const deltaTime = performance.now();
