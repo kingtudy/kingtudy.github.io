@@ -250,12 +250,12 @@ description =
     '<p class="s-font">Cafeteria was a temporary web management app I developed to manage a cafeteria business. The app featured two parts: one for the client and one for the admin. The admin could manage inventory, create menus, read reviews, post polls, and more. The client could view the daily menu, place orders, and provide feedback.</p>' +
     '<div class="m-font subnautica-content-font">Key Features:</div>' +
     '<ul>' +
-        '<li><strong>Admin Interface</strong>: Manage inventory, create menus, read reviews, and post polls.</li>' +
-        '<li><strong>Client Interface</strong>: View daily menu, place orders, and provide feedback.</li>' +
-        '<li><strong>Inventory Management</strong>: Admins can track and manage stock levels.</li>' +
-        '<li><strong>Menu Creation</strong>: Easily create and update menus.</li>' +
-        '<li><strong>Customer Feedback</strong>: Collect and read customer reviews and feedback.</li>' +
-        '<li><strong>Polling</strong>: Post polls to engage with customers and gather insights.</li>' +
+        '<li class="s-font"><strong>Admin Interface</strong>: Manage inventory, create menus, read reviews, and post polls.</li>' +
+        '<li class="s-font"><strong>Client Interface</strong>: View daily menu, place orders, and provide feedback.</li>' +
+        '<li class="s-font"><strong>Inventory Management</strong>: Admins can track and manage stock levels.</li>' +
+        '<li class="s-font"><strong>Menu Creation</strong>: Easily create and update menus.</li>' +
+        '<li class="s-font"><strong>Customer Feedback</strong>: Collect and read customer reviews and feedback.</li>' +
+        '<li class="s-font"><strong>Polling</strong>: Post polls to engage with customers and gather insights.</li>' +
     '</ul>';
 
 techs = {
@@ -356,9 +356,7 @@ const subnautica = '<h3 class="subnautica-font mt-2 text-center m-0">Subnautica-
 
     '<div class="d-flex justify-content-start align-items-center inter-section-custom-margin">' +
     '<h3 style="margin: 0 1em 0 0;" class="subnautica-font d-inline">Access project:</h3>' +
-    '<a target="_blank" class="outer-link subnautica-rounded-btn" href="'+ link +'" >' +
-    '<img src="./assets/img/icons/eye.gif" alt="eye" class="img-responsive" />' +
-    '</a>' +
+    '- you are already here -' +
     '</div>' +
 
     '<h3 class="subnautica-font inter-section-custom-margin">Description:</h3>' +

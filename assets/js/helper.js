@@ -66,12 +66,44 @@ $(document).ready(function() {
         myModal.show();
         modalLabel.text('ABOUT ME');
         modalBody.html(aboutContent);
+
+        let tabs = $('.display-tabs-container div').children('.display-tab');
+        let contents = $('.display-content-container').children('.display-content');
+
+        tabs.each(function(index) {
+            $(this).attr('id', 'tab-id-' + index);
+        });
+
+        contents.each(function(index) {
+            $(this).attr('id', 'content-id-' + index);
+            if(index > 0) {
+                $(this).hide();
+            }
+        });
+
+        setClickListeners(tabs);
     });
 
     workBtn.on('click', function() {
         myModal.show();
         modalLabel.text('WORK EXPERIENCE');
         modalBody.html(workContent);
+
+        let tabs = $('.display-tabs-container div').children('.display-tab');
+        let contents = $('.display-content-container').children('.display-content');
+
+        tabs.each(function(index) {
+            $(this).attr('id', 'tab-id-' + index);
+        });
+
+        contents.each(function(index) {
+            $(this).attr('id', 'content-id-' + index);
+            if(index > 0) {
+                $(this).hide();
+            }
+        });
+
+        setClickListeners(tabs);
     });
 
     function setClickListeners(tabs) {
