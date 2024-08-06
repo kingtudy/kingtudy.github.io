@@ -3,7 +3,12 @@
 const aboutContent = [
     '<div style="height: 100%;" class="display-content-container">' +
     '<div class="display-content">' +
-    '<h4 class="white subnautica-content-font">I\'m a highly skilled and motivated web developer with 5 years of experience in designing visually appealing and user-friendly websites. <br>I possess strong problem-solving abilities and a keen eye for detail. <br>I have an engineering degree, and I\'m fluent in English(C1 Academic IELTS exam). <br><br>Right now, I\'m looking to further improve myself and my skills by learning new modern web developer tools such as React, Next.js, Vue and so on. I also have prior knowledge with C, C++, Python and Java. I\'m eager to learn and adjust in order to meet the demands of the task at hand, including the willingness to work beyond regular hours when required. I take pride in the work that I do and look into further expanding my knowledge on various technological fields.</h4>' +
+    '<h4 class="white subnautica-content-font">' +
+    '🌎 I dream of making a strong difference to the world one day. That the cumulative knowledge I acquire through life, along with the experience I gain, will enable me to create a better future for me and those around me.<br><br>' +
+    '✔️ I\'m a skilled and motivated software engineer with 5 years of proven experience in designing visually appealing and user-friendly websites and web applications. Each tool is well-suited for its specific purpose. For my work, I utilize the following tools: JS(React, React Native, Node.js, Three.js, jQuery); CSS(Bootstrap, SASS); PHP(PHP5, Guzzle); DB(SQL, MongoDB); TESTING(PHPUnit, Selenium Webdrive, Percy).<br><br>' +
+    '💻 My motivation helped me develop skills that cover various technological topics besides my main area of expertise: Linux, Machine learning, Game Development, Mobile Development.<br><br>' +
+    '"A future is not given to you, it is something you must take for yourself !" - Nier' +
+    '</h4>' +
     '</div>'+
     '</div>',
 ];
