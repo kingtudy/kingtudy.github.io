@@ -12,6 +12,11 @@
     --subnautica-yellow-deep: #FFA318;
 }
 
+.white {
+    color: white !important;
+    text-shadow: 2px 1px 3px black;
+}
+
 body {
     margin: 0;
     overflow: hidden;
