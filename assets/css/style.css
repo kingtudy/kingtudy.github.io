@@ -456,26 +456,8 @@ body {
     font-size: 15px;
 }
 
-#MenuArrow {
-    color: white;
-    text-shadow: 0px 2px 3px black;
-}
-
-.show-hide-btn {
-    border: 2px solid var(--subnautica-blue-neon);
-    border-radius: 25px;
-    position: absolute;
-    left: 25%;
-    top: -35px;
-    cursor: pointer;
-    font-size: 30px;
-    width: 50%;
-    background-color: var(--subnautica-blue-deep);
-}
-
-.menu-hider {
-    bottom: -500px !important;
-    transition: all 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+.display-tabs-container-inner {
+    position: fixed;
 }
 
 .display-content-container {
@@ -485,6 +467,10 @@ body {
     border-radius: 5px;
     justify-content: flex-start;
     align-items: flex-start;
+}
+
+.show-hide-btn {
+    display: none;
 }
 
 .display-content-container:before {

@@ -369,7 +369,7 @@ const subnautica = '<h3 class="subnautica-font mt-2 text-center m-0">Subnautica-
 const projectsContent = [
     '<div class="row h-100">' +
         '<div class="p-0 col-md-3 display-tabs-container">' +
-            '<div class="position-fixed">' +
+            '<div class="display-tabs-container-inner">' +
                 '<button onclick="smoothScroll()" class="subnautica-btn display-tab active">LTT Desk Configurator</button>' +
                 '<div class="menu-option-separator"></div>' +
                 '<button onclick="smoothScroll()" class="subnautica-btn display-tab">MSV.global</button>' +
