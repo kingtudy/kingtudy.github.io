@@ -8,6 +8,8 @@
 
     <link href="./assets/css/style.css" rel="stylesheet" type="text/css" />
 
+    <link href="./assets/css/the_great_resizer_style.css" rel="stylesheet" type="text/css"/>
+
     <!--  Core shit  -->
     <script type="importmap">
         {
@@ -95,11 +97,15 @@
                 </div>
                 <div class="col-md-2"></div>
                 <div class="right-side-of-menu col-md-7">
-                    <div class="menu-contact-container">
+
+                    <div id="contactContainer" class="menu-contact-container">
+                        <button id="contactArrow" class="show-hide-btn">
+                            <i id="MenuArrow" class="fa fa-chevron-up" aria-hidden="true"></i>
+                        </button>
                         <div class="menu-contact">
                             <div class="menu-contact-inner">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 menu-contact-first-half">
                                         <h4 class="subnautica-font contact-text">Here's how you can contact me: </h4>
                                         <h6 class="subnautica-content-font contact-text-description">I’m always happy to chat and see how I can assist you with your web development needs. Looking forward to connecting with you! &#x2005;&#x2005;-Gabriel</h6>
                                         <div class="social-container">
@@ -114,7 +120,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 menu-contact-second-half">
                                         <form class="form-container" method="post" action="https://sophirion.net/portfolio/contact.php">
                                             <input id="email" name="email" class="form-mail subnautica-content-font" type="text" placeholder="Your email:" value="" />
                                             <textarea id="message" name="message" class="form-message subnautica-content-font" placeholder="Your message:"></textarea>

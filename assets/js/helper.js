@@ -254,4 +254,24 @@ $(document).ready(function() {
     //         console.log('Key pressed:', event.key);
     //     });
     // }, 2000);
+
+    let menuBtn = $('#contactArrow');
+    let menuElem = $("#contactContainer");
+    let menuArrow = $("#MenuArrow");
+    let menuState = 0;
+    menuBtn.on('click', function () {
+        if (menuElem.hasClass("menu-hider")) {
+            menuState = 0;
+            menuElem.removeClass("menu-hider");
+            menuArrow.addClass("fa-chevron-up");
+            menuArrow.removeClass("fa-chevron-down");
+        } else {
+            menuState = 1;
+            menuElem.addClass("menu-hider");
+            menuArrow.removeClass("fa-chevron-up");
+            menuArrow.addClass("fa-chevron-down");
+        }
+    });
+
+
 });

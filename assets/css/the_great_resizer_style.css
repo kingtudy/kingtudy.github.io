@@ -1,0 +1,25 @@
+@media (max-width: 768px) {
+    .left-side-of-menu, .right-side-of-menu {
+        padding: 0;
+        justify-content: flex-start;
+    }
+    .menu-contact-container {
+        height: 100%;
+        transition: all 1000ms cubic-bezier(0.19, 1, 0.22, 1);
+        z-index: 9999;
+        bottom: 0;
+    }
+    .menu-contact-inner .row {
+        display: flex;
+        height: 100%;
+    }
+    .menu-contact-inner, .form-container {
+        justify-content: space-evenly;
+    }
+
+    .menu-contact-first-half {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
