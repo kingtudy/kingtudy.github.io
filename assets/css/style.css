@@ -493,8 +493,8 @@ body {
     text-shadow: 2px 1px 3px black;
     margin: 15px;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    height: -webkit-fill-available;
+    overflow-y: auto;
 }
 
 .cool-separator {

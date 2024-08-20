@@ -152,6 +152,7 @@
     }
 
     .show-hide-btn {
+        display: block;
         border: 2px solid var(--subnautica-blue-neon);
         border-radius: 25px;
         position: absolute;
@@ -164,7 +165,7 @@
     }
 
     .menu-hider {
-        bottom: -500px !important;
+        bottom: -58vh !important;
         transition: all 1000ms cubic-bezier(0.19, 1, 0.22, 1);
     }
 }
