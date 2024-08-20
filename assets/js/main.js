@@ -250,16 +250,22 @@ scene.add(auroraLight);
 // const auroraLightHelper = new THREE.PointLightHelper(auroraLight, 10);
 // scene.add(auroraLightHelper);
 
+let loadedframes = {
+    v: 0
+};
+
 function lowerAnimation() {
     //FPS stabilizer - 60
     const deltaTime = performance.now();
 
     //If not enough time has passed since the last render, skip this frame
-    if (deltaTime < 1000 / 120) {
+    if(loadedframes.v === 1) {
+        if (deltaTime < 1000 / 120) {
+            requestAnimationFrame(lowerAnimation);
+            return;
+        }
         requestAnimationFrame(lowerAnimation);
-        return;
     }
-    requestAnimationFrame(lowerAnimation);
 
     water.material.uniforms['time'].value += 1.0 / 60.0;
 
@@ -307,11 +313,13 @@ function animate() {
     const deltaTime = performance.now();
 
     //If not enough time has passed since the last render, skip this frame
-    if (deltaTime < 1000 / 120) {
+    if(loadedframes.v === 1) {
+        if (deltaTime < 1000 / 120) {
+            requestAnimationFrame(animate);
+            return;
+        }
         requestAnimationFrame(animate);
-        return;
     }
-    requestAnimationFrame(animate);
 
     // const elapsedTime = performance.now() / 1000;
     // if (water.material.userData.shader) {
@@ -374,8 +382,16 @@ function animate() {
     //to put something while the data gets transfer to the GPU
 }
 
+if(isMobile()) {
+    lowerAnimation();
+} else {
+    // lowerAnimation();
+    animate();
+}
+
 window.animate = animate;
 window.lowerAnimation = lowerAnimation;
+window.loadedframes = loadedframes;
 
 $(window).on("load", function() {
     $('.preloader-img').hide();
